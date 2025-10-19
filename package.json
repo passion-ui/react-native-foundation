@@ -47,7 +47,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wem2017/passionui-react-native-foundation.git"
+    "url": "git+https://github.com/passion-ui/react-native-foundation.git"
   },
   "author": "Dũng (Wem) <huynh.developer@gmail.com> (https://github.com/wem2017)",
   "license": "MIT",
