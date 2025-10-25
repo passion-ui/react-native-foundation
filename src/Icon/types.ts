@@ -19,7 +19,6 @@ export interface IconProps extends TextProps {
 
   /**
    *  Optional. Represents the color of the icon.
-   * It can be any valid color in @momo-kits/foundation.
    */
   color?: string;
 }

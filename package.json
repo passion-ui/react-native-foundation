@@ -52,9 +52,9 @@
   "author": "Dũng (Wem) <huynh.developer@gmail.com> (https://github.com/wem2017)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wem2017/passionui-react-native-foundation/issues"
+    "url": "https://github.com/passion-ui/react-native-foundation/issues"
   },
-  "homepage": "https://github.com/wem2017/passionui-react-native-foundation#readme",
+  "homepage": "https://github.com/passion-ui/react-native-foundation#readme",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
@@ -86,8 +86,14 @@
     "typescript": "^5.9.2"
   },
   "peerDependencies": {
-    "react": "*",
-    "react-native": "*"
+    "react": ">=18.0.0",
+    "react-native": ">=0.70.0",
+    "react-native-gesture-handler": ">=2.0.0",
+    "react-native-reanimated": ">=3.0.0",
+    "react-native-safe-area-context": ">=4.0.0",
+    "react-native-svg": ">=13.0.0",
+    "react-native-vector-icons": ">=10.0.0",
+    "react-native-worklets": ">=0.5.0"
   },
   "dependencies": {
     "@d11/react-native-fast-image": "8.12.0",
@@ -98,15 +104,7 @@
     "buffer": "5.5.0",
     "i18next": "25.5.2",
     "react-i18next": "15.7.3",
-    "react-native-gesture-handler": "2.28.0",
-    "react-native-linear-gradient": "2.8.3",
-    "react-native-pager-view": "6.9.1",
     "react-native-progress": "5.0.1",
-    "react-native-reanimated": "4.1.0",
-    "react-native-safe-area-context": "5.6.1",
-    "react-native-svg": "15.14.0",
-    "react-native-vector-icons": "10.3.0",
-    "react-native-worklets": "0.5.0",
     "tinycolor2": "1.6.0"
   },
   "workspaces": [
