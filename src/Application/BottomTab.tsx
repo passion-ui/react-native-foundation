@@ -209,7 +209,7 @@ const BottomTab: React.FC<BottomTabProps> = ({
       }}
       initialRouteName={initialRouteName}
     >
-      {tabs.map((item) => {
+      {tabs.map((item, index) => {
         return (
           <Tab.Screen
             key={`BottomTab-${item.name}`}
@@ -219,7 +219,7 @@ const BottomTab: React.FC<BottomTabProps> = ({
               focus: onFocus,
               tabPress: Keyboard.dismiss,
             }}
-            initialParams={item}
+            initialParams={{ ...item, index }}
             options={{
               tabBarBackground: () => (
                 <View
@@ -309,4 +309,5 @@ const styles = StyleSheet.create({
     }),
   },
 });
+
 export default BottomTab;
