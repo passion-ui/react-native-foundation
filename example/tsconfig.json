@@ -1,0 +1,18 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "@passionui/react-native-foundation": ["../packages/foundation/src"],
+      "@components": ["../example/components"],
+      "@assets": ["../example/assets"],
+      "@screens": ["../example/screens"]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "../packages/foundation/src/**/*.ts",
+    "../packages/foundation/src/**/*.tsx"
+  ]
+}

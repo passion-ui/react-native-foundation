@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "@passionui/react-native-foundation": ["./src/index"]
+      "@passionui/react-native-foundation": ["./packages/foundation/src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

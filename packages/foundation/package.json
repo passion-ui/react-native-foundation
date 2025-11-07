@@ -1,0 +1,84 @@
+{
+  "name": "@passionui/react-native-foundation",
+  "version": "0.1.2",
+  "description": "A React Native design system for making cross platform applications",
+  "main": "./lib/module/index.js",
+  "types": "./lib/typescript/src/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./lib/typescript/src/index.d.ts",
+      "default": "./lib/module/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "lib",
+    "!**/__tests__",
+    "!**/__fixtures__",
+    "!**/__mocks__",
+    "!**/.*"
+  ],
+  "scripts": {
+    "build": "bob build",
+    "clean": "del-cli lib",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "react-native",
+    "ios",
+    "android",
+    "design-system",
+    "ui-components"
+  ],
+  "author": "Dũng (Wem) <huynh.developer@gmail.com> (https://github.com/wem2017)",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.70.0",
+    "react-native-linear-gradient": ">=2.0.0",
+    "react-native-gesture-handler": ">=2.0.0",
+    "react-native-reanimated": ">=4.0.0",
+    "react-native-safe-area-context": ">=5.0.0",
+    "react-native-svg": ">=15.0.0",
+    "react-native-vector-icons": ">=10.0.0",
+    "react-native-worklets": ">=0.6.0",
+    "@d11/react-native-fast-image": ">=8.12.0",
+    "react-native-pager-view": ">=6.9.1"
+  },
+  "dependencies": {
+    "@react-navigation/bottom-tabs": "7.7.1",
+    "@react-navigation/elements": "2.8.0",
+    "@react-navigation/native": "7.1.19",
+    "@react-navigation/stack": "7.6.1",
+    "buffer": "5.7.1",
+    "i18next": "25.6.0",
+    "react-i18next": "15.7.4",
+    "react-native-progress": "5.0.1",
+    "tinycolor2": "1.6.0"
+  },
+  "devDependencies": {
+    "@types/tinycolor2": "1.4.6",
+    "typescript": "^5.9.2",
+    "@types/react-native-vector-icons": "6.4.18"
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      [
+        "module",
+        {
+          "esm": true
+        }
+      ],
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
+    ]
+  }
+}
