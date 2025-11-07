@@ -23,20 +23,16 @@ import {
   useRef,
 } from 'react';
 
+import { ApplicationContext } from './index';
+import { Colors, Spacing, Styles } from '../Consts';
 import {
-  ApplicationContext,
-  Colors,
   HeaderBackground,
   HeaderExtendHeader,
   HeaderSearch,
-  type HeaderSearchProps,
   NavigationBackButton,
-  type ScreenProps,
-  type ScreenRef,
-  SizedBox,
-  Spacing,
-  Styles,
-} from '../index';
+} from './Components';
+import type { HeaderSearchProps, ScreenProps, ScreenRef } from './types';
+import { SizedBox } from '../SizedBox';
 import type { StackNavigationOptions } from '@react-navigation/stack';
 
 const Screen = forwardRef<ScreenRef, ScreenProps>(

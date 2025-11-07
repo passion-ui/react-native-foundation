@@ -1,7 +1,10 @@
 import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import { StyleSheet, View, Animated } from 'react-native';
 
-import { Shadow, SizedBox, Spacing, Toast, type ToastParams } from '../index';
+import { Shadow, Spacing } from '../Consts';
+import { SizedBox } from '../SizedBox';
+import { Toast } from '../Toast';
+import type { ToastParams } from './types';
 
 export default forwardRef((_, ref) => {
   const toasts = useRef<any>([]);

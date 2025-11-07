@@ -2,6 +2,8 @@
  * foundation component
  */
 export * from './Consts';
+export * from './Context';
+export * from './Context/types';
 export * from './Layout';
 export * from './Layout/types';
 export * from './Popup';

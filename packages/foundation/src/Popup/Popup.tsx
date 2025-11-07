@@ -1,15 +1,11 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import {
-  ApplicationContext,
-  Button,
-  Image,
-  type PopupProps,
-  Radius,
-  Spacing,
-  Styles,
-  Text,
-} from '../index';
+import { ApplicationContext } from '../Application';
+import { Button } from '../Button';
+import { Image } from '../Image';
+import type { PopupProps } from './types';
+import { Radius, Spacing, Styles } from '../Consts';
+import { Text } from '../Text';
 
 const Popup: React.FC<PopupProps> = ({
   image,

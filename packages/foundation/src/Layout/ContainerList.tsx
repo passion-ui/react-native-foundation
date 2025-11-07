@@ -1,10 +1,12 @@
 import { type FC, useEffect, useRef } from 'react';
 import { Animated as AnimatedRN, type FlatListProps } from 'react-native';
-import { GridContext, Item, SizedBox } from '../index';
+import { Item } from './index';
+import { SizedBox } from '../SizedBox';
 
 import Animated, { FadeInRight, FadeInUp } from 'react-native-reanimated';
 import styles from './styles';
 import { useGridSystem } from './utils';
+import { GridContext } from '../Context';
 
 export interface ItemListProps extends FlatListProps<any> {
   /**

@@ -1,15 +1,12 @@
 import React, { useContext } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import {
-  ApplicationContext,
-  Icon,
-  SizedBox,
-  Spacing,
-  Styles,
-  type TabBarItemProps,
-  Text,
-  type Typography,
-} from '../index';
+import { ApplicationContext } from '../Application';
+import { Icon } from '../Icon';
+import { SizedBox } from '../SizedBox';
+import { Spacing, Styles } from '../Consts';
+import type { TabBarItemProps } from './types';
+import { Text } from '../Text';
+import type { Typography } from '../Text/types';
 
 const TabItem: React.FC<TabBarItemProps> = ({
   label,

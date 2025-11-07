@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { ApplicationContext } from '../index';
 import { getTypoStyle, Text } from '../../Text';
-import { InputSearch } from '../../Input';
+import InputSearch from '../../Input/InputSearch';
 import { Colors, Spacing, Styles } from '../../Consts';
 import { Image } from '../../Image';
 import type { InputRef } from '../../Input/types';

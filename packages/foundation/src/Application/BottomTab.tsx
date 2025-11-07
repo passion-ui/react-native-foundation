@@ -15,19 +15,21 @@ import {
   View,
 } from 'react-native';
 import StackScreen from './StackScreen';
+import { ApplicationContext } from './index';
+import type {
+  BottomTabProps,
+  RootStackParamList,
+  ScreenContainerProps,
+} from './types';
+import { Colors } from '../Consts';
+import { getTypoStyle } from '../Text';
 import {
-  ApplicationContext,
-  type BottomTabProps,
-  Colors,
-  getTypoStyle,
   HeaderBackground,
   HeaderTitle,
-  Icon,
   NavigationBackButton,
-  type RootStackParamList,
-  type ScreenContainerProps,
-  Text,
-} from '../index';
+} from './Components';
+import { Icon } from '../Icon';
+import { Text } from '../Text';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const Tab = createBottomTabNavigator();

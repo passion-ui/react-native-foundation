@@ -6,15 +6,12 @@ import {
   View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {
-  ApplicationContext,
-  type ButtonProps,
-  Colors,
-  Icon,
-  Radius,
-  Text,
-  type Typography,
-} from '../index';
+import { ApplicationContext } from '../Application';
+import type { ButtonProps } from './types';
+import { Colors, Radius } from '../Consts';
+import { Icon } from '../Icon';
+import { Text } from '../Text';
+import type { Typography } from '../Text/types';
 import styles from './styles';
 
 const Button: FC<ButtonProps> = ({

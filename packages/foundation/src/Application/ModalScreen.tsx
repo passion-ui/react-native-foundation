@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useRef } from 'react';
+import React, { useCallback, useContext, useEffect, useRef } from 'react';
 import {
   Animated,
   Easing,
@@ -8,13 +8,9 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import {
-  ApplicationContext,
-  Colors,
-  type ScreenContainerProps,
-  Spacing,
-  Styles,
-} from '../index';
+import { ApplicationContext } from './index';
+import { Colors, Spacing, Styles } from '../Consts';
+import type { ScreenContainerProps } from './types';
 import BottomSheet from './BottomSheet';
 
 const ModalScreen: React.FC<ScreenContainerProps> = (props) => {

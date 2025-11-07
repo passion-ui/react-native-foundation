@@ -14,15 +14,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 import StackScreen from './StackScreen';
 import DialogScreen from './DialogScreen';
 import ModalScreen from './ModalScreen';
+import { ApplicationContext } from './index';
 import {
-  ApplicationContext,
   HeaderBackground,
   HeaderTitle,
   NavigationBackButton,
-  type NavigationContainerProps,
-  type RootStackParamList,
-  Styles,
-} from '../index';
+} from './Components';
+import type { NavigationContainerProps, RootStackParamList } from './types';
+import { Styles } from '../Consts';
 import LoadingView from './LoadingView';
 import ToastView from './ToastView';
 

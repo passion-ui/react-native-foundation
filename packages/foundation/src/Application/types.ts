@@ -7,7 +7,7 @@ import {
   type ViewProps,
   type ViewStyle,
 } from 'react-native';
-import type { ReactNode } from 'react';
+import React, { type ReactNode } from 'react';
 import Navigator from './Navigator';
 import type { HeaderButtonProps } from '@react-navigation/elements';
 import type { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';

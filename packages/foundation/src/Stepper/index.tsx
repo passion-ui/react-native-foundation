@@ -1,7 +1,10 @@
 import { type FC, useContext, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 
-import { ApplicationContext, Colors, Icon, Styles, Text } from '../index';
+import { ApplicationContext } from '../Application';
+import { Colors, Styles } from '../Consts';
+import { Icon } from '../Icon';
+import { Text } from '../Text';
 import type { StepperProps } from './types';
 import styles from './styles';
 

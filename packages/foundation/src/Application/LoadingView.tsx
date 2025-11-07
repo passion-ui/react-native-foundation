@@ -7,7 +7,8 @@ import {
 } from 'react';
 import { CircleSnail } from 'react-native-progress';
 import { BackHandler, StyleSheet, View } from 'react-native';
-import { Colors, type LoadingParams } from '../index';
+import { Colors } from '../Consts';
+import type { LoadingParams } from './types';
 
 export default forwardRef((_, ref) => {
   const timeout = useRef<any>(undefined);

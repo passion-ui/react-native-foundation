@@ -8,15 +8,12 @@ import {
 
 import type { PickerItem, SheetPickerProps } from './types';
 import styles from './styles';
-import {
-  ApplicationContext,
-  InputSearch,
-  Radio,
-  SizedBox,
-  Spacing,
-  Styles,
-  Text,
-} from '../index';
+import { ApplicationContext } from '../Application';
+import InputSearch from '../Input/InputSearch';
+import { Radio } from '../Radio';
+import { SizedBox } from '../SizedBox';
+import { Spacing, Styles } from '../Consts';
+import { Text } from '../Text';
 
 const SheetPicker: FC<SheetPickerProps> = ({
   data,

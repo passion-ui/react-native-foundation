@@ -1,5 +1,6 @@
 import { View, type ViewStyle } from 'react-native';
 import type { SizedBoxProps } from './types';
+import React from 'react';
 
 const SizedBox: React.FC<SizedBoxProps> = ({ width, height, ...props }) => {
   const style: ViewStyle = {

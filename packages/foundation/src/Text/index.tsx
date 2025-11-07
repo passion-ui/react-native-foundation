@@ -1,12 +1,8 @@
 import React, { useContext } from 'react';
 import { Text as RNText } from 'react-native';
-import {
-  ApplicationContext,
-  type FontWeight,
-  type TextProps,
-  type Theme,
-  type Typography,
-} from '../index';
+import { ApplicationContext } from '../Application';
+import type { FontWeight, TextProps, Typography } from './types';
+import type { Theme } from '../Application/types';
 import styles from './styles';
 
 const SFProText: Record<string, string> = {

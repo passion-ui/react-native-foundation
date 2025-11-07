@@ -1,8 +1,9 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { View } from 'react-native';
 
-import { GridContext, type ItemProps } from '../index';
+import type { ItemProps } from './types';
 import styles from './styles';
+import { GridContext } from '../Context';
 
 const Item: React.FC<ItemProps> = ({
   widthSpan,

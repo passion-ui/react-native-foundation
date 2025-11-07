@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet, View, type ViewStyle } from 'react-native';
 import {
   ApplicationContext,

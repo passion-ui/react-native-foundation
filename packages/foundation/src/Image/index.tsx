@@ -1,14 +1,12 @@
-import { useContext, useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import FastImage from '@d11/react-native-fast-image';
 import { View } from 'react-native';
 import styles from './styles';
-import {
-  ApplicationContext,
-  Icon,
-  type ImageProps,
-  Skeleton,
-  Styles,
-} from '../index';
+import { ApplicationContext } from '../Application';
+import { Icon } from '../Icon';
+import type { ImageProps } from './types';
+import { Skeleton } from '../Skeleton';
+import { Styles } from '../Consts';
 
 type Status = 'success' | 'loading' | 'error';
 

@@ -2,9 +2,11 @@ import React from 'react';
 import { View } from 'react-native';
 import { useGridSystem } from './utils';
 import type { ContainerProps } from './types';
-import { GridContext, Image, Styles } from '../index';
+import { Image } from '../Image';
+import { Styles } from '../Consts/styles';
 
 import styles from './styles';
+import { GridContext } from '../Context';
 
 const Container: React.FC<ContainerProps> = ({
   children,

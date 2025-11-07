@@ -1,16 +1,11 @@
 import { type FC, useContext } from 'react';
 import { View, type ViewStyle } from 'react-native';
-import {
-  ApplicationContext,
-  Colors,
-  Icon,
-  Radius,
-  Shadow,
-  Spacing,
-  Text,
-  type TagProps,
-  type Typography,
-} from '../index';
+import { ApplicationContext } from '../Application';
+import { Colors, Radius, Shadow, Spacing } from '../Consts';
+import { Icon } from '../Icon';
+import { Text } from '../Text';
+import type { TagProps } from './types';
+import type { Typography } from '../Text/types';
 import styles from './styles';
 
 const Tag: FC<TagProps> = ({

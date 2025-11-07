@@ -1,9 +1,11 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import type { ImageRequireSource } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { ApplicationContext, type IconProps, Image } from '../index';
+import { ApplicationContext } from '../Application';
+import type { IconProps } from './types';
+import { Image } from '../Image';
 
 const Icon: React.FC<IconProps> = ({
   type,

@@ -1,7 +1,10 @@
 import { type FC, useContext } from 'react';
 import { View } from 'react-native';
 
-import { ApplicationContext, type BadgeProps, Colors, Text } from '../index';
+import { ApplicationContext } from '../Application';
+import type { BadgeProps } from './types';
+import { Colors } from '../Consts';
+import { Text } from '../Text';
 import styles from './styles';
 
 const Badge: FC<BadgeProps> = ({ label = 'Label', type, style }) => {
