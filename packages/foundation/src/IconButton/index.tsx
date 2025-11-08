@@ -1,11 +1,9 @@
 import React, { useContext } from 'react';
 import { TouchableOpacity } from 'react-native';
-import {
-  ApplicationContext,
-  Colors,
-  Icon,
-  type IconButtonProps,
-} from '../index';
+import { ApplicationContext } from '../Context';
+import { Colors } from '../Consts';
+import { Icon } from '../Icon';
+import type { IconButtonProps } from './types';
 import styles from './styles';
 
 const IconButton: React.FC<IconButtonProps> = ({

@@ -1,12 +1,12 @@
 import React, { useContext, useRef, useState } from 'react';
-import FastImage from '@d11/react-native-fast-image';
 import { View } from 'react-native';
 import styles from './styles';
-import { ApplicationContext } from '../Application';
+import { ApplicationContext } from '../Context';
 import { Icon } from '../Icon';
-import type { ImageProps } from './types';
 import { Skeleton } from '../Skeleton';
 import { Styles } from '../Consts';
+import { Image as Component } from '../Adapters';
+import type { ImageProps } from './types';
 
 type Status = 'success' | 'loading' | 'error';
 
@@ -38,7 +38,7 @@ const Image: React.FC<ImageProps> = ({
   };
 
   return (
-    <FastImage
+    <Component
       {...rest}
       source={source}
       style={[styles.container, style] as any}
@@ -65,7 +65,7 @@ const Image: React.FC<ImageProps> = ({
       }}
     >
       {renderContent()}
-    </FastImage>
+    </Component>
   );
 };
 

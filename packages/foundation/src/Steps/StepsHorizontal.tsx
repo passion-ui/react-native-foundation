@@ -1,16 +1,11 @@
 import { type FC, useContext } from 'react';
 import { View } from 'react-native';
-import {
-  ApplicationContext,
-  Colors,
-  Icon,
-  SizedBox,
-  Spacing,
-  type Step,
-  type StepsProps,
-  Styles,
-  Text,
-} from '../index';
+import { ApplicationContext } from '../Context';
+import { Colors, Spacing, Styles } from '../Consts';
+import { Icon } from '../Icon';
+import { SizedBox } from '../SizedBox';
+import type { Step, StepsProps } from './types';
+import { Text } from '../Text';
 import { getStepColor, getStepTextStyle } from './utils';
 import styles from './styles';
 

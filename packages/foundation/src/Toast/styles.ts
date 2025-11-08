@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Radius, Colors } from '../index';
+import { Radius, Colors } from '../Consts';
 
 export default StyleSheet.create({
   container: {

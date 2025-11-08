@@ -15,7 +15,7 @@ import {
   View,
 } from 'react-native';
 import StackScreen from './StackScreen';
-import { ApplicationContext } from './index';
+import { ApplicationContext } from '../Context';
 import type {
   BottomTabProps,
   RootStackParamList,

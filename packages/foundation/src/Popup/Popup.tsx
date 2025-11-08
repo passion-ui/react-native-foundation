@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { ApplicationContext } from '../Application';
+import { ApplicationContext } from '../Context';
 import { Button } from '../Button';
 import { Image } from '../Image';
 import type { PopupProps } from './types';

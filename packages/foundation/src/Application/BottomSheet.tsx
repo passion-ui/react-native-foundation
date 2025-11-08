@@ -20,7 +20,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ApplicationContext } from './index';
+import { ApplicationContext } from '../Context';
 import type { BottomSheetParams, ScreenContainerProps } from './types';
 import { Colors, Radius, Spacing, Styles } from '../Consts';
 import { Text } from '../Text';

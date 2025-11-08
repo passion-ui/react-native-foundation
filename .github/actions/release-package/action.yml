@@ -1,0 +1,110 @@
+name: 'Release Package'
+description: 'Release a specific package with release-it'
+
+inputs:
+  package-name:
+    description: 'Name of the package to release (e.g., foundation)'
+    required: true
+  workspace-name:
+    description: 'Full workspace name (e.g., @passionui/react-native-foundation)'
+    required: true
+  release-type:
+    description: 'Type of release (beta, patch, minor, major, or custom version)'
+    required: true
+  npm-token:
+    description: 'NPM authentication token'
+    required: true
+  github-token:
+    description: 'GitHub authentication token'
+    required: true
+  dry-run:
+    description: 'Run in dry-run mode'
+    required: false
+    default: 'false'
+
+outputs:
+  version:
+    description: 'The released version'
+    value: ${{ steps.release.outputs.version }}
+  tag:
+    description: 'The git tag created'
+    value: ${{ steps.release.outputs.tag }}
+
+runs:
+  using: composite
+  steps:
+    - name: Configure Git
+      shell: bash
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
+    - name: Configure NPM
+      shell: bash
+      run: |
+        echo "//registry.npmjs.org/:_authToken=${{ inputs.npm-token }}" > ~/.npmrc
+
+    - name: Determine release command
+      id: release-cmd
+      shell: bash
+      run: |
+        RELEASE_TYPE="${{ inputs.release-type }}"
+        DRY_RUN="${{ inputs.dry-run }}"
+
+        # Base command
+        CMD="release-it"
+
+        # Add CI flag
+        CMD="$CMD --ci"
+
+        # Add dry-run if specified
+        if [ "$DRY_RUN" = "true" ]; then
+          CMD="$CMD --dry-run"
+        fi
+
+        # Add release type
+        case "$RELEASE_TYPE" in
+          beta)
+            CMD="$CMD --preRelease=beta"
+            ;;
+          alpha)
+            CMD="$CMD --preRelease=alpha"
+            ;;
+          rc)
+            CMD="$CMD --preRelease=rc"
+            ;;
+          patch|minor|major)
+            CMD="$CMD $RELEASE_TYPE"
+            ;;
+          *)
+            # Custom version
+            CMD="$CMD $RELEASE_TYPE"
+            ;;
+        esac
+
+        echo "command=$CMD" >> $GITHUB_OUTPUT
+        echo "📦 Release command: $CMD"
+
+    - name: Release package
+      id: release
+      shell: bash
+      working-directory: packages/${{ inputs.package-name }}
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        NPM_TOKEN: ${{ inputs.npm-token }}
+      run: |
+        # Run release
+        ${{ steps.release-cmd.outputs.command }}
+
+        # Get the new version
+        VERSION=$(node -p "require('./package.json').version")
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "tag=v$VERSION" >> $GITHUB_OUTPUT
+
+        echo "✅ Released version: $VERSION"
+
+    - name: Cleanup NPM config
+      if: always()
+      shell: bash
+      run: rm -f ~/.npmrc
+

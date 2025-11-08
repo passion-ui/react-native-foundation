@@ -15,7 +15,7 @@ import {
   getFontStyle,
 } from './common';
 import { Icon } from '../Icon';
-import { ApplicationContext } from '../Application';
+import { ApplicationContext } from '../Context';
 import type { InputRef, InputTextAreaProps } from './types';
 import { Spacing } from '../Consts';
 

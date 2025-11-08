@@ -14,9 +14,9 @@ class Navigator {
   toastRef?: any;
 
   constructor(data: {
-    ref: React.MutableRefObject<any>;
-    loadingRef: React.MutableRefObject<any>;
-    toastRef: React.MutableRefObject<any>;
+    ref: React.RefObject<any>;
+    loadingRef: React.RefObject<any>;
+    toastRef: React.RefObject<any>;
   }) {
     this.ref = data.ref;
     this.loadingRef = data.loadingRef;

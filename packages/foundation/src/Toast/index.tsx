@@ -1,16 +1,12 @@
 import { type FC, useContext } from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import {
-  ApplicationContext,
-  Colors,
-  Divider,
-  Icon,
-  SizedBox,
-  Spacing,
-  Styles,
-  Text,
-  type ToastProps,
-} from '../index';
+import { ApplicationContext } from '../Context';
+import { Colors, Spacing, Styles } from '../Consts';
+import { Divider } from '../Divider';
+import { Icon } from '../Icon';
+import { SizedBox } from '../SizedBox';
+import { Text } from '../Text';
+import type { ToastProps } from './types';
 import styles from './styles';
 
 const Toast: FC<ToastProps> = ({

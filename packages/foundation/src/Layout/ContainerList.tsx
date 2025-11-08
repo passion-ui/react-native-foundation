@@ -1,6 +1,6 @@
 import { type FC, useEffect, useRef } from 'react';
 import { Animated as AnimatedRN, type FlatListProps } from 'react-native';
-import { Item } from './index';
+import Item from './Item';
 import { SizedBox } from '../SizedBox';
 
 import Animated, { FadeInRight, FadeInUp } from 'react-native-reanimated';

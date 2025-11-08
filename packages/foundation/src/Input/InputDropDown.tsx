@@ -8,13 +8,11 @@ import {
   getIconSize,
   getSizeStyle,
 } from './common';
-import {
-  ApplicationContext,
-  Icon,
-  type InputDropDownProps,
-  SizedBox,
-  Spacing,
-} from '../index';
+import { ApplicationContext } from '../Context';
+import { Icon } from '../Icon';
+import type { InputDropDownProps } from './types';
+import { SizedBox } from '../SizedBox';
+import { Spacing } from '../Consts';
 import styles from './styles';
 
 const InputDropDown: FC<InputDropDownProps> = ({

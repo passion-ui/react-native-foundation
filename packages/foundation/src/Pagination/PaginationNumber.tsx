@@ -1,7 +1,8 @@
 import { type FC } from 'react';
 import { View } from 'react-native';
-import type { ChildPaginationProps } from '../index';
-import { Colors, Text } from '../index';
+import type { ChildPaginationProps } from './types';
+import { Colors } from '../Consts';
+import { Text } from '../Text';
 import styles from './styles';
 
 const PaginationNumber: FC<ChildPaginationProps> = ({

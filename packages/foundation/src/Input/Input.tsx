@@ -14,15 +14,11 @@ import {
   getIconSize,
   getSizeStyle,
 } from './common';
-import {
-  ApplicationContext,
-  Icon,
-  type InputProps,
-  type InputRef,
-  SizedBox,
-  Spacing,
-  Styles,
-} from '../index';
+import { ApplicationContext } from '../Context';
+import { Icon } from '../Icon';
+import type { InputProps, InputRef } from './types';
+import { SizedBox } from '../SizedBox';
+import { Spacing, Styles } from '../Consts';
 import styles from './styles';
 
 const Input = forwardRef<InputRef, InputProps>(

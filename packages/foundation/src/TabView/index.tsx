@@ -8,7 +8,7 @@ import {
 } from 'react';
 import { Animated, View } from 'react-native';
 import PagerView from 'react-native-pager-view';
-import { ApplicationContext } from '../Application';
+import { ApplicationContext } from '../Context';
 import { Styles } from '../Consts';
 import type { TabBarProps } from './types';
 import styles from './styles';

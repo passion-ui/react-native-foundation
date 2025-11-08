@@ -1,4 +1,4 @@
-import type { FlatListProps } from 'react-native';
+import type { FlatListProps, ListRenderItem } from 'react-native';
 import type { ReactNode } from 'react';
 
 export type PickerItem = {
@@ -8,9 +8,11 @@ export type PickerItem = {
   value: any;
 };
 
-export interface SheetPickerProps extends FlatListProps<PickerItem> {
+export interface SheetPickerProps
+  extends Omit<FlatListProps<PickerItem>, 'renderItem'> {
   data: PickerItem[];
   selected?: PickerItem;
   onSelect: (data: any) => void;
   onRequestClose?: (callback?: () => void) => void;
+  renderItem?: ListRenderItem<PickerItem> | null | undefined;
 }

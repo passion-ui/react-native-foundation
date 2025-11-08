@@ -1,6 +1,8 @@
 import { type FC, useContext } from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import { ApplicationContext, Colors, type SwitchProps } from '../index';
+import { ApplicationContext } from '../Context';
+import { Colors } from '../Consts';
+import type { SwitchProps } from './types';
 import styles from './styles';
 
 const Switch: FC<SwitchProps> = ({

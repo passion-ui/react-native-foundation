@@ -1,11 +1,9 @@
 import React, { useContext } from 'react';
 import type { ImageRequireSource } from 'react-native';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { ApplicationContext } from '../Application';
+
+import { ApplicationContext } from '../Context';
 import type { IconProps } from './types';
-import { Image } from '../Image';
+import { Image, VectorIcons } from '../Adapters';
 
 const Icon: React.FC<IconProps> = ({
   type,
@@ -19,23 +17,23 @@ const Icon: React.FC<IconProps> = ({
   let Component: any;
   switch (type) {
     case 'FontAwesome5':
-      Component = FontAwesome5;
+      Component = VectorIcons.FontAwesome5;
       break;
     case 'FontAwesome':
-      Component = FontAwesome;
+      Component = VectorIcons.FontAwesome;
       break;
     default:
-      Component = MaterialCommunityIcons;
+      Component = VectorIcons.MaterialCommunityIcons;
       break;
   }
 
   if (type === 'Image') {
     return (
       <Image
+        {...rest}
         source={name as ImageRequireSource}
         style={{ width: size, height: size } as any}
         resizeMode={'contain'}
-        {...rest}
       />
     );
   }

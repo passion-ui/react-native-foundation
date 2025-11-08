@@ -1,16 +1,12 @@
 import { type FC, useContext } from 'react';
 import { View } from 'react-native';
 import { getStepColor, getStepTextStyle } from './utils';
-import {
-  ApplicationContext,
-  Colors,
-  Icon,
-  SizedBox,
-  Spacing,
-  type StepsProps,
-  Styles,
-  Text,
-} from '../index';
+import { ApplicationContext } from '../Context';
+import { Colors, Spacing, Styles } from '../Consts';
+import { Icon } from '../Icon';
+import { SizedBox } from '../SizedBox';
+import type { StepsProps } from './types';
+import { Text } from '../Text';
 import styles from './styles';
 
 const StepsVertical: FC<StepsProps> = ({ steps, activeIndex, size }) => {

@@ -5,8 +5,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import { ApplicationContext } from '../Application';
+import { LinearGradient } from '../Adapters';
+import { ApplicationContext } from '../Context';
 import type { ButtonProps } from './types';
 import { Colors, Radius } from '../Consts';
 import { Icon } from '../Icon';

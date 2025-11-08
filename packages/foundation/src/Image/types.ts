@@ -1,5 +1,10 @@
-import type { FastImageProps } from '@d11/react-native-fast-image';
+import type {
+  ImageProps as ImageAdapterProps,
+  ImageSource as ImageAdapterSource,
+} from '../Adapters';
 
-export interface ImageProps extends FastImageProps {
+export type ImageProps = ImageAdapterProps & {
   loading?: boolean;
-}
+};
+
+export type ImageSource = ImageAdapterSource;

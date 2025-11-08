@@ -1,6 +1,7 @@
 import { type FC, useContext, useRef, useState } from 'react';
 import { Animated, View } from 'react-native';
-import { ApplicationContext, type ScrollIndicatorProps } from '../index';
+import { ApplicationContext } from '../Context';
+import type { ScrollIndicatorProps } from './types';
 import styles from './styles';
 
 const INDICATOR_WIDTH = 24;

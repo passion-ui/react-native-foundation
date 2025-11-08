@@ -23,7 +23,7 @@ import {
   useRef,
 } from 'react';
 
-import { ApplicationContext } from './index';
+import { ApplicationContext } from '../Context';
 import { Colors, Spacing, Styles } from '../Consts';
 import {
   HeaderBackground,

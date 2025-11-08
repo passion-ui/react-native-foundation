@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Radius, Spacing } from '../index';
+import { Radius, Spacing } from '../Consts';
 
 export default StyleSheet.create({
   step: {

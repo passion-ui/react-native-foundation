@@ -1,0 +1,104 @@
+name: Release Package
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package to release'
+        required: true
+        type: choice
+        options:
+          - foundation
+      release-type:
+        description: 'Release type'
+        required: true
+        type: choice
+        options:
+          - beta
+          - alpha
+          - rc
+          - patch
+          - minor
+          - major
+
+concurrency:
+  group: release-${{ github.event.inputs.package }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Release ${{ github.event.inputs.package }}
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Get package workspace name
+        id: package-info
+        run: |
+          PACKAGE_NAME="${{ github.event.inputs.package }}"
+
+          # Map package names to workspace names
+          case "$PACKAGE_NAME" in
+            foundation)
+              WORKSPACE_NAME="@passionui/react-native-foundation"
+              ;;
+            # Add more packages here
+            # animations)
+            #   WORKSPACE_NAME="@passionui/react-native-animations"
+            #   ;;
+            *)
+              echo "Unknown package: $PACKAGE_NAME"
+              exit 1
+              ;;
+          esac
+
+          echo "workspace=$WORKSPACE_NAME" >> $GITHUB_OUTPUT
+          echo "📦 Package: $PACKAGE_NAME"
+          echo "🏷️  Workspace: $WORKSPACE_NAME"
+
+      - name: Build and check package
+        uses: ./.github/actions/build-package
+        with:
+          package-name: ${{ github.event.inputs.package }}
+          workspace-name: ${{ steps.package-info.outputs.workspace }}
+
+      - name: Release package
+        id: release
+        uses: ./.github/actions/release-package
+        with:
+          package-name: ${{ github.event.inputs.package }}
+          workspace-name: ${{ steps.package-info.outputs.workspace }}
+          release-type: ${{ github.event.inputs.release-type }}
+          npm-token: ${{ secrets.NPM_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          dry-run: 'false'
+
+      - name: Release summary
+        run: |
+          echo "## 🚀 Release Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Package:** ${{ steps.package-info.outputs.workspace }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Version:** ${{ steps.release.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Tag:** ${{ steps.release.outputs.tag }}" >> $GITHUB_STEP_SUMMARY
+
+

@@ -1,6 +1,7 @@
 import { type FC } from 'react';
 import { View } from 'react-native';
-import { Colors, Spacing, type ChildPaginationProps } from '../index';
+import { Colors, Spacing } from '../Consts';
+import type { ChildPaginationProps } from './types';
 import styles from './styles';
 import Dot from './Dot';
 

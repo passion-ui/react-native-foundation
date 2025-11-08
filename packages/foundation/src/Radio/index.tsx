@@ -1,12 +1,9 @@
 import { type FC, useContext } from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import {
-  ApplicationContext,
-  type RadioProps,
-  Spacing,
-  Styles,
-  Text,
-} from '../index';
+import type { RadioProps } from './types';
+import { ApplicationContext } from '../Context';
+import { Spacing, Styles } from '../Consts';
+import { Text } from '../Text';
 import styles from './styles';
 
 const Radio: FC<RadioProps> = ({

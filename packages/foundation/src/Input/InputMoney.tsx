@@ -15,14 +15,11 @@ import {
   getIconSize,
   getSizeStyle,
 } from './common';
-import {
-  ApplicationContext,
-  Icon,
-  type InputMoneyProps,
-  type InputRef,
-  SizedBox,
-  Spacing,
-} from '../index';
+import { ApplicationContext } from '../Context';
+import { Icon } from '../Icon';
+import type { InputMoneyProps, InputRef } from './types';
+import { SizedBox } from '../SizedBox';
+import { Spacing } from '../Consts';
 import { formatMoneyToNumber, formatNumberToMoney } from './utils';
 import styles from './styles';
 

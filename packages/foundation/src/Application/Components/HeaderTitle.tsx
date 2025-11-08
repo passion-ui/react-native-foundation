@@ -6,7 +6,7 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
-import { ApplicationContext } from '../index';
+import { ApplicationContext } from '../../Context';
 import { getTypoStyle, Text } from '../../Text';
 import InputSearch from '../../Input/InputSearch';
 import { Colors, Spacing, Styles } from '../../Consts';

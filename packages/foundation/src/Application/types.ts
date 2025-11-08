@@ -1,6 +1,5 @@
 import {
   Animated,
-  type ImageSourcePropType,
   ScrollView,
   type ScrollViewProps,
   type StyleProp,
@@ -11,10 +10,12 @@ import React, { type ReactNode } from 'react';
 import Navigator from './Navigator';
 import type { HeaderButtonProps } from '@react-navigation/elements';
 import type { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
-import type { InputRef, InputSearchProps, ToastProps } from '../index';
 import type { Edges } from 'react-native-safe-area-context';
 import { Localization } from '../Localization';
 import type { StackNavigationProp } from '@react-navigation/stack';
+import type { Theme } from '../Context/types';
+import type { ToastProps } from '../Toast/types';
+import type { InputRef, InputSearchProps } from '../Input/types';
 
 export type RootStackParamList = {
   Stack: {
@@ -31,68 +32,6 @@ export type RootStackParamList = {
     onDismiss?: () => void;
     barrierDismissible?: boolean;
   };
-};
-
-/**
- * Theme type.
- */
-export type Theme = {
-  dark: boolean;
-  colors: {
-    primary: {
-      default: string;
-      light: string;
-      container: string;
-    };
-    secondary: {
-      default: string;
-      light: string;
-      container: string;
-    };
-    background: {
-      default: string;
-      surface: string;
-      disable: string;
-    };
-    text: {
-      default: string;
-      secondary: string;
-      hint: string;
-      disable: string;
-    };
-    border: {
-      default: string;
-      disable: string;
-    };
-    success: {
-      default: string;
-      light: string;
-      container: string;
-    };
-    warning: {
-      default: string;
-      light: string;
-      container: string;
-    };
-    error: {
-      default: string;
-      light: string;
-      container: string;
-    };
-  };
-  font: string;
-  assets?: {
-    headerBackground?: ImageSourcePropType;
-  };
-};
-
-/**
- * Context type.
- */
-export type Context = {
-  theme: Theme;
-  navigator?: Navigator;
-  translate: (key: string) => string;
 };
 
 /**

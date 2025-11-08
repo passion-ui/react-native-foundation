@@ -1,6 +1,6 @@
 import type { TouchableOpacityProps } from 'react-native';
 import type { ReactNode } from 'react';
-import type { LinearGradientProps } from 'react-native-linear-gradient';
+import type { LinearGradientProps } from '../Adapters';
 
 export interface ButtonProps extends TouchableOpacityProps {
   /**

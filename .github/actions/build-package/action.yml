@@ -1,0 +1,36 @@
+name: 'Package Build & Check'
+description: 'Build and typecheck a specific package'
+
+inputs:
+  package-name:
+    description: 'Name of the package to build (e.g., foundation)'
+    required: true
+  workspace-name:
+    description: 'Full workspace name (e.g., @passionui/react-native-foundation)'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Clean package
+      shell: bash
+      run: npm run clean --workspace=${{ inputs.workspace-name }}
+
+    - name: Type check
+      shell: bash
+      run: npm run typecheck --workspace=${{ inputs.workspace-name }}
+
+    - name: Build package
+      shell: bash
+      run: npm run build --workspace=${{ inputs.workspace-name }}
+
+    - name: Verify build output
+      shell: bash
+      working-directory: packages/${{ inputs.package-name }}
+      run: |
+        if [ ! -d "lib" ]; then
+          echo "❌ Build failed: lib directory not found"
+          exit 1
+        fi
+        echo "✅ Build successful"
+

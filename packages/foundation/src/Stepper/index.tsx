@@ -1,7 +1,7 @@
 import { type FC, useContext, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 
-import { ApplicationContext } from '../Application';
+import { ApplicationContext } from '../Context';
 import { Colors, Styles } from '../Consts';
 import { Icon } from '../Icon';
 import { Text } from '../Text';
