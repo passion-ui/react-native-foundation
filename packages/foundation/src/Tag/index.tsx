@@ -1,6 +1,6 @@
 import { type FC, useContext } from 'react';
 import { View, type ViewStyle } from 'react-native';
-import { ApplicationContext } from '../Application';
+import { ApplicationContext } from '../Context';
 import { Colors, Radius, Shadow, Spacing } from '../Consts';
 import { Icon } from '../Icon';
 import { Text } from '../Text';

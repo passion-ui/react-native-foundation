@@ -1,7 +1,7 @@
 import { type FC, useContext } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 
-import { ApplicationContext } from '../Application';
+import { ApplicationContext } from '../Context';
 import type { CheckBoxProps } from './types';
 import { Colors } from '../Consts';
 import { Icon } from '../Icon';

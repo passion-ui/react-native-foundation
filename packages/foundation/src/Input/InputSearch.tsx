@@ -6,15 +6,10 @@ import {
   useState,
 } from 'react';
 import { TextInput, TouchableOpacity, View } from 'react-native';
-import {
-  ApplicationContext,
-  Icon,
-  type InputRef,
-  type InputSearchProps,
-  Shadow,
-  Spacing,
-  Styles,
-} from '../index';
+import { ApplicationContext } from '../Context';
+import { Icon } from '../Icon';
+import type { InputRef, InputSearchProps } from './types';
+import { Shadow, Spacing, Styles } from '../Consts';
 import { getFontStyle } from './common';
 
 import styles from './styles';

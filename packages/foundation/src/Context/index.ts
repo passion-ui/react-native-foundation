@@ -1,5 +1,8 @@
 import { createContext } from 'react';
-import type { GridContextProps } from './types';
+import type { GridContextProps, Context } from './types';
+import { defaultContext } from '../Consts';
+
+const ApplicationContext = createContext<Context>(defaultContext);
 
 const GridContext = createContext<GridContextProps>({
   numberOfColumns: 12,
@@ -8,4 +11,4 @@ const GridContext = createContext<GridContextProps>({
   getSizeSpan: (span) => span,
 });
 
-export { GridContext };
+export { GridContext, ApplicationContext };

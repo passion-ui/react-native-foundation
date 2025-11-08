@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { Colors, Opacity } from '../../Consts';
 import type { NavigationButtonProps } from '../types';
-import { ApplicationContext } from '../index';
+import { ApplicationContext } from '../../Context';
 import { Icon } from '../../Icon';
 import { Text } from '../../Text';
 

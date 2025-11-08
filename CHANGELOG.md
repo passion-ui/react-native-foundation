@@ -1,48 +1,106 @@
-# Changelog
 
-All notable changes to this project will be documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
-## [0.1.2] - 2025-10-25
+## [0.1.1-beta.1] - 2024-11-09
 
 ### Added
-- Complete foundation component library with 25+ components
-- Navigation system integration with React Navigation
-- Theming support with customizable design tokens
-- Internationalization (i18n) support
+- Initial beta release
+- Core UI component library (25+ components)
+  - Layout: Layout, SizedBox, Divider
+  - Typography: Text with multiple variants
+  - Buttons: Button, IconButton
+  - Form Controls: Input, CheckBox, Radio, Switch
+  - Navigation: NavigationContainer, StackScreen, BottomTab, ModalScreen, DialogScreen, BottomSheet
+  - Feedback: Toast, Loading, Skeleton
+  - Data Display: Badge, Tag, Steps, Stepper, Pagination
+  - Media: Image, Icon
+  - Utilities: TabView, SheetPicker, LoopText
+- Theme system with customizable tokens
+- Dark mode support
+- Internationalization (i18n) with react-i18next
 - TypeScript definitions for all components
-- Example app with component showcase
+- Reanimated integration for smooth animations
+- Cross-platform support (iOS, Android, Web)
 
-### Components
-- **Layout**: Flexible layout components
-- **Typography**: Text components with typography system
-- **Buttons**: Button, IconButton with multiple variants
-- **Forms**: Input, CheckBox, Radio, Switch
-- **Navigation**: BottomTab, StackScreen, ModalScreen, DialogScreen
-- **Feedback**: Toast, Loading, Skeleton
-- **Data Display**: Badge, Tag, Divider, Steps, Stepper
-- **Media**: Image component with caching support
-- **Utilities**: SizedBox, Pagination, TabView, SheetPicker, LoopText
-
-### Infrastructure
-- ESLint and Prettier configuration
-- TypeScript strict mode
-- Conventional commits with Commitlint
-- CI/CD with GitHub Actions
-- React Native Builder Bob for build process
-
-## [Unreleased]
-
-### Planned
-- Component documentation site
-- Storybook integration
-- Unit tests coverage
-- Performance optimizations
-- Additional components
+### Documentation
+- README with installation and usage
+- Component API documentation
+- Example app with interactive demos
 
 ---
 
-[0.1.2]: https://github.com/passion-ui/react-native-foundation/releases/tag/v0.1.2
+## Version Links
+
+[0.1.1-beta.1]: https://github.com/passion-ui/react-native-foundation/releases/tag/v0.1.1-beta.1
+
+---
+
+## Changelog Format Guide
+
+When updating this changelog, use these categories:
+
+### Added
+For new features, components, or functionality.
+
+Example:
+```markdown
+- New `Dropdown` component with customizable options
+- Support for custom fonts in theme configuration
+```
+
+### Changed
+For changes in existing functionality (non-breaking).
+
+Example:
+```markdown
+- Improved `Button` animation performance
+- Updated default theme colors for better contrast
+```
+
+### Deprecated
+For features that will be removed in future versions.
+
+Example:
+```markdown
+- `oldThemeAPI()` is deprecated, use `newThemeAPI()` instead
+```
+
+### Removed
+For removed features or components.
+
+Example:
+```markdown
+- Removed deprecated `LegacyButton` component
+```
+
+### Fixed
+For bug fixes.
+
+Example:
+```markdown
+- Fixed `Input` focus issue on Android
+- Resolved memory leak in `Image` component
+```
+
+### Security
+For security-related changes.
+
+Example:
+```markdown
+- Updated dependencies to fix vulnerability CVE-2024-XXXXX
+```
+
+### Breaking Changes ⚠️
+
+For major version releases, clearly mark breaking changes:
+
+Example:
+```markdown
+## [2.0.0] - 2024-12-01
+
+### Breaking Changes ⚠️
+
+- **Theme API**: Restructured theme tokens. Migration guide: [link]
+- **Button**: Removed `size` prop, use `variant` instead
+  - Before: `<Button size="large" />`
+  - After: `<Button variant="large" />`
+```
 

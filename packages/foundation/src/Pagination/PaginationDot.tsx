@@ -1,11 +1,9 @@
 import { type FC, useContext } from 'react';
 import { View } from 'react-native';
 import Dot from './Dot';
-import {
-  ApplicationContext,
-  Spacing,
-  type ChildPaginationProps,
-} from '../index';
+import { ApplicationContext } from '../Context';
+import { Spacing } from '../Consts';
+import type { ChildPaginationProps } from './types';
 import styles from './styles';
 
 const PaginationDot: FC<ChildPaginationProps> = ({

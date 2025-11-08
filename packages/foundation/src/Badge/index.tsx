@@ -1,7 +1,7 @@
 import { type FC, useContext } from 'react';
 import { View } from 'react-native';
 
-import { ApplicationContext } from '../Application';
+import { ApplicationContext } from '../Context';
 import type { BadgeProps } from './types';
 import { Colors } from '../Consts';
 import { Text } from '../Text';

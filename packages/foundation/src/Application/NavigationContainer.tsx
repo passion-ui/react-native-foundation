@@ -14,7 +14,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import StackScreen from './StackScreen';
 import DialogScreen from './DialogScreen';
 import ModalScreen from './ModalScreen';
-import { ApplicationContext } from './index';
+import { ApplicationContext } from '../Context';
 import {
   HeaderBackground,
   HeaderTitle,

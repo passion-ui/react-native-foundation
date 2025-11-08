@@ -1,0 +1,23 @@
+name: 'Build Package'
+description: 'Build and typecheck a package using workspace name'
+
+inputs:
+  package:
+    description: 'Full package name (e.g., @passionui/react-native-foundation)'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Clean package
+      shell: bash
+      run: npm run clean --workspace=${{ inputs.package }}
+
+    - name: Type check package
+      shell: bash
+      run: npm run typecheck --workspace=${{ inputs.package }}
+
+    - name: Build package
+      shell: bash
+      run: npm run build --workspace=${{ inputs.package }}
+

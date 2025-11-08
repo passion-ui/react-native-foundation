@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import LinearGradient from 'react-native-linear-gradient';
+import { LinearGradient } from '../../Adapters';
 import {
   Animated,
   Platform,
@@ -8,13 +8,11 @@ import {
   type ViewProps,
   type ViewStyle,
 } from 'react-native';
-import { ApplicationContext } from '../index';
+import { ApplicationContext } from '../../Context';
 import type { HeaderBackgroundProps } from '../types';
 import { Opacity, Styles } from '../../Consts';
 import { Image } from '../../Image';
 import { SizedBox } from '../../SizedBox';
-
-const LinearGradientAnimated = Animated.createAnimatedComponent(LinearGradient);
 
 const HeaderBackground: React.FC<HeaderBackgroundProps> = React.memo(
   ({
@@ -71,21 +69,23 @@ const HeaderBackground: React.FC<HeaderBackgroundProps> = React.memo(
             />
             <View style={styles.gradientContainer}>
               {useGradient && (
-                <LinearGradientAnimated
-                  colors={[
-                    theme.colors.primary.default + Opacity['40'],
-                    theme.colors.primary.default + Opacity['0'],
-                  ]}
-                  style={[styles.extendedHeader, { opacity: opacityGradient }]}
-                >
-                  {theme.assets?.headerBackground && (
-                    <Image
-                      source={theme.assets?.headerBackground as any}
-                      style={Styles.flex as any}
-                      loading={false}
-                    />
-                  )}
-                </LinearGradientAnimated>
+                <Animated.View style={{ opacity: opacityGradient }}>
+                  <LinearGradient
+                    colors={[
+                      theme.colors.primary.default + Opacity['40'],
+                      theme.colors.primary.default + Opacity['0'],
+                    ]}
+                    style={styles.extendedHeader}
+                  >
+                    {theme.assets?.headerBackground && (
+                      <Image
+                        source={theme.assets?.headerBackground as any}
+                        style={Styles.flex as any}
+                        loading={false}
+                      />
+                    )}
+                  </LinearGradient>
+                </Animated.View>
               )}
             </View>
           </>
@@ -177,25 +177,23 @@ const HeaderExtendHeader: React.FC<{
         ]}
       />
 
-      <LinearGradientAnimated
-        colors={[
-          theme.colors.primary.default + Opacity['30'],
-          theme.colors.primary.default + Opacity['0'],
-        ]}
-        style={[
-          styles.extendedHeader,
-          styles.headerImage,
-          { opacity: opacityGradient },
-        ]}
-      >
-        {theme.assets?.headerBackground && (
-          <Image
-            source={theme.assets?.headerBackground as any}
-            style={Styles.flex as any}
-            loading={false}
-          />
-        )}
-      </LinearGradientAnimated>
+      <Animated.View style={{ opacity: opacityGradient }}>
+        <LinearGradient
+          colors={[
+            theme.colors.primary.default + Opacity['30'],
+            theme.colors.primary.default + Opacity['0'],
+          ]}
+          style={[styles.extendedHeader, styles.headerImage]}
+        >
+          {theme.assets?.headerBackground && (
+            <Image
+              source={theme.assets?.headerBackground as any}
+              style={Styles.flex as any}
+              loading={false}
+            />
+          )}
+        </LinearGradient>
+      </Animated.View>
     </>
   );
 };

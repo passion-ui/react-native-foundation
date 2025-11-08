@@ -8,7 +8,7 @@ import {
 
 import type { PickerItem, SheetPickerProps } from './types';
 import styles from './styles';
-import { ApplicationContext } from '../Application';
+import { ApplicationContext } from '../Context';
 import InputSearch from '../Input/InputSearch';
 import { Radio } from '../Radio';
 import { SizedBox } from '../SizedBox';

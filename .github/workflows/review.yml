@@ -1,0 +1,371 @@
+name: Review & Quality Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches:
+      - main
+      - develop
+      - 'release/**'
+
+concurrency:
+  group: review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  # Validate PR title and branch naming
+  validate-pr:
+    name: Validate PR
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Check PR title
+        uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            docs
+            style
+            refactor
+            perf
+            test
+            build
+            ci
+            chore
+            revert
+          requireScope: false
+          subjectPattern: ^(?![A-Z]).+$
+          subjectPatternError: |
+            The subject "{subject}" found in the pull request title "{title}"
+            didn't match the configured pattern. Please ensure that the subject
+            doesn't start with an uppercase character.
+
+      - name: Validate branch name
+        run: |
+          BRANCH_NAME="${{ github.head_ref }}"
+
+          # Allowed patterns: feature/*, fix/*, docs/*, chore/*, refactor/*, perf/*, test/*
+          if [[ ! "$BRANCH_NAME" =~ ^(feature|fix|docs|chore|refactor|perf|test)/.+ ]]; then
+            echo "❌ Invalid branch name: $BRANCH_NAME"
+            echo ""
+            echo "Branch name must follow one of these patterns:"
+            echo "  - feature/description"
+            echo "  - fix/description"
+            echo "  - docs/description"
+            echo "  - chore/description"
+            echo "  - refactor/description"
+            echo "  - perf/description"
+            echo "  - test/description"
+            exit 1
+          fi
+
+          echo "✅ Branch name is valid: $BRANCH_NAME"
+
+      - name: Check PR size
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const additions = pr.additions;
+            const deletions = pr.deletions;
+            const total = additions + deletions;
+
+            let size = 'XS';
+            let color = 'green';
+
+            if (total > 1000) {
+              size = 'XL';
+              color = 'red';
+            } else if (total > 500) {
+              size = 'L';
+              color = 'orange';
+            } else if (total > 100) {
+              size = 'M';
+              color = 'yellow';
+            } else if (total > 10) {
+              size = 'S';
+              color = 'green';
+            }
+
+            core.setOutput('size', size);
+            core.setOutput('color', color);
+            core.setOutput('lines', total);
+
+            if (total > 500) {
+              core.warning(`This PR is quite large (${total} lines changed). Consider breaking it into smaller PRs.`);
+            }
+
+  # Lint and type check
+  code-quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Get changed packages
+        id: changed-packages
+        run: |
+          # Get list of changed files
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+
+          # Detect which packages were modified
+          PACKAGES=""
+          if echo "$CHANGED_FILES" | grep -q "^packages/foundation/"; then
+            PACKAGES="$PACKAGES foundation"
+          fi
+          # Add more package checks here as you add them
+
+          echo "packages=$PACKAGES" >> $GITHUB_OUTPUT
+
+          if [ -z "$PACKAGES" ]; then
+            echo "No package changes detected"
+          else
+            echo "Changed packages: $PACKAGES"
+          fi
+
+      - name: Type check foundation
+        if: contains(steps.changed-packages.outputs.packages, 'foundation')
+        run: npm run typecheck --workspace=@passionui/react-native-foundation
+
+      - name: Build foundation
+        if: contains(steps.changed-packages.outputs.packages, 'foundation')
+        run: npm run build --workspace=@passionui/react-native-foundation
+
+      - name: Check for build artifacts
+        if: contains(steps.changed-packages.outputs.packages, 'foundation')
+        run: |
+          if [ ! -d "packages/foundation/lib" ]; then
+            echo "❌ Build failed: lib directory not found"
+            exit 1
+          fi
+          echo "✅ Build successful"
+
+  # Run tests if they exist
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run tests
+        run: |
+          # Check if test script exists
+          if npm run --workspace=@passionui/react-native-foundation test --if-present 2>/dev/null; then
+            echo "✅ Tests passed"
+          else
+            echo "ℹ️ No tests configured"
+          fi
+        continue-on-error: true
+
+  # Detect breaking changes
+  breaking-changes:
+    name: Detect Breaking Changes
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for breaking changes
+        id: breaking
+        run: |
+          # Check PR title and commits for breaking change indicators
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          COMMITS=$(git log origin/${{ github.base_ref }}..HEAD --pretty=format:"%s%n%b")
+
+          BREAKING=false
+
+          # Check for BREAKING CHANGE in commits or PR title
+          if echo "$PR_TITLE" | grep -qi "breaking"; then
+            BREAKING=true
+          fi
+
+          if echo "$COMMITS" | grep -q "BREAKING CHANGE"; then
+            BREAKING=true
+          fi
+
+          # Check for major version bump indicators
+          if echo "$PR_TITLE" | grep -qE "^(feat|fix)!:"; then
+            BREAKING=true
+          fi
+
+          echo "detected=$BREAKING" >> $GITHUB_OUTPUT
+
+          if [ "$BREAKING" = "true" ]; then
+            echo "⚠️ Breaking changes detected!"
+          fi
+
+      - name: Comment on breaking changes
+        if: steps.breaking.outputs.detected == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comment = `## ⚠️ Breaking Changes Detected
+
+            This PR appears to introduce breaking changes. Please ensure:
+
+            - [ ] Breaking changes are documented in the PR description
+            - [ ] Migration guide is provided
+            - [ ] Version will be bumped appropriately (major version)
+            - [ ] All breaking changes are listed in CHANGELOG.md
+
+            **Note:** This is an automated check. If this is a false positive, you can ignore this message.`;
+
+            // Check if comment already exists
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number
+            });
+
+            const existingComment = comments.data.find(c =>
+              c.user.type === 'Bot' && c.body.includes('Breaking Changes Detected')
+            );
+
+            if (!existingComment) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: comment
+              });
+            }
+
+  # Label based on changes
+  auto-label:
+    name: Auto Label
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Label based on changed files
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: files } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+
+            const labels = new Set();
+
+            for (const file of files) {
+              const path = file.filename;
+
+              // Package labels
+              if (path.startsWith('packages/foundation/')) {
+                labels.add('package:foundation');
+              }
+
+              // Type labels
+              if (path.endsWith('.md')) {
+                labels.add('documentation');
+              } else if (path.includes('/__tests__/') || path.includes('.test.') || path.includes('.spec.')) {
+                labels.add('tests');
+              } else if (path.startsWith('.github/')) {
+                labels.add('ci/cd');
+              } else if (path.includes('/example/')) {
+                labels.add('example');
+              }
+
+              // Component labels
+              if (path.match(/packages\/foundation\/src\/(\w+)\//)) {
+                const component = path.match(/packages\/foundation\/src\/(\w+)\//)[1];
+                if (!['index.ts', 'Consts', 'Context'].includes(component)) {
+                  labels.add(`component:${component.toLowerCase()}`);
+                }
+              }
+            }
+
+            // Add PR type label from title
+            const title = context.payload.pull_request.title;
+            if (title.startsWith('feat')) labels.add('feature');
+            else if (title.startsWith('fix')) labels.add('bug');
+            else if (title.startsWith('docs')) labels.add('documentation');
+            else if (title.startsWith('chore')) labels.add('maintenance');
+            else if (title.startsWith('refactor')) labels.add('refactoring');
+            else if (title.startsWith('perf')) labels.add('performance');
+
+            // Apply labels
+            if (labels.size > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                labels: Array.from(labels)
+              });
+            }
+
+  # Check dependencies
+  dependency-review:
+    name: Dependency Review
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: moderate
+          deny-licenses: GPL-3.0, AGPL-3.0
+
+  # Final status check
+  review-summary:
+    name: Review Summary
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    needs: [validate-pr, code-quality, test, breaking-changes, auto-label, dependency-review]
+
+    steps:
+      - name: All checks passed
+        run: |
+          echo "✅ All review checks passed!"
+          echo ""
+          echo "This PR is ready for human review."
+

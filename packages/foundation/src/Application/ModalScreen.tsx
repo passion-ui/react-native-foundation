@@ -8,7 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import { ApplicationContext } from './index';
+import { ApplicationContext } from '../Context';
 import { Colors, Spacing, Styles } from '../Consts';
 import type { ScreenContainerProps } from './types';
 import BottomSheet from './BottomSheet';

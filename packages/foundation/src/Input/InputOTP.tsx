@@ -8,15 +8,10 @@ import React, {
 } from 'react';
 import { Animated, TextInput, TouchableOpacity, View } from 'react-native';
 import { ErrorView, getBorderColor } from './common';
-import {
-  ApplicationContext,
-  type CaretProps,
-  type InputOTPProps,
-  Spacing,
-  Text,
-  Styles,
-  type InputRef,
-} from '../index';
+import { ApplicationContext } from '../Context';
+import type { CaretProps, InputOTPProps, InputRef } from './types';
+import { Spacing, Styles } from '../Consts';
+import { Text } from '../Text';
 import styles from './styles';
 
 const OTPCaret: React.FC<CaretProps> = ({ index, length }) => {

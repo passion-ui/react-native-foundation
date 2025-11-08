@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Animated } from 'react-native';
-import { ApplicationContext, getTypoStyle, type LoopTextProps } from '../index';
+import { ApplicationContext } from '../Context';
+import { getTypoStyle } from '../Text';
+import type { LoopTextProps } from './types';
 
 const LoopText: React.FC<LoopTextProps> = ({
   labels = ['Hello world!'],

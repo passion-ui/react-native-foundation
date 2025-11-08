@@ -1,4 +1,5 @@
-import type { Typography, Theme, FontWeight } from '../index';
+import type { Typography, FontWeight } from '../Text/types';
+import type { Theme } from '../Context/types';
 
 type StepStatus = 'inactive' | 'active' | 'completed' | 'error';
 type StepTypo = {

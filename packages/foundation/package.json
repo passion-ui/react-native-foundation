@@ -1,6 +1,6 @@
 {
   "name": "@passionui/react-native-foundation",
-  "version": "0.1.2",
+  "version": "0.1.1-beta.1",
   "description": "A React Native design system for making cross platform applications",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
@@ -37,15 +37,35 @@
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-native": ">=0.70.0",
-    "react-native-linear-gradient": ">=2.0.0",
     "react-native-gesture-handler": ">=2.0.0",
     "react-native-reanimated": ">=4.0.0",
     "react-native-safe-area-context": ">=5.0.0",
     "react-native-svg": ">=15.0.0",
-    "react-native-vector-icons": ">=10.0.0",
     "react-native-worklets": ">=0.6.0",
-    "@d11/react-native-fast-image": ">=8.12.0",
     "react-native-pager-view": ">=6.9.1"
+  },
+  "peerDependenciesMeta": {
+    "react-native-linear-gradient": {
+      "optional": true
+    },
+    "expo-linear-gradient": {
+      "optional": true
+    },
+    "react-native-vector-icons": {
+      "optional": true
+    },
+    "@expo/vector-icons": {
+      "optional": true
+    },
+    "@d11/react-native-fast-image": {
+      "optional": true
+    },
+    "expo-image": {
+      "optional": true
+    },
+    "expo-font": {
+      "optional": true
+    }
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "7.7.1",

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { ApplicationContext } from '../Application';
+import { ApplicationContext } from '../Context';
 import { Icon } from '../Icon';
 import { SizedBox } from '../SizedBox';
 import { Spacing, Styles } from '../Consts';

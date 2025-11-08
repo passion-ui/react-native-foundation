@@ -1,13 +1,11 @@
 import { Animated, type StyleProp, View, type ViewStyle } from 'react-native';
 import styles from './styles';
 import { type FC, useContext, useEffect, useRef } from 'react';
-import {
-  ApplicationContext,
-  getTypoStyle,
-  Icon,
-  Text,
-  type Theme,
-} from '../index';
+import { ApplicationContext } from '../Context';
+import { getTypoStyle } from '../Text';
+import { Icon } from '../Icon';
+import { Text } from '../Text';
+import type { Theme } from '../Context/types';
 
 type FloatingViewProps = {
   floatingValue?: string;

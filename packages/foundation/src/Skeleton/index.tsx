@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { Animated, Easing, StyleSheet, View } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import { ApplicationContext, type SkeletonTypes, Styles } from '../index';
+import { LinearGradient } from '../Adapters';
+import { ApplicationContext } from '../Context';
+import type { SkeletonTypes } from './types';
+import { Styles } from '../Consts';
 import styles from './styles';
 
 const Skeleton: React.FC<SkeletonTypes> = ({ style }) => {

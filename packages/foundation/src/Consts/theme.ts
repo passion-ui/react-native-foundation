@@ -1,4 +1,4 @@
-import type { Context, Theme } from '../Application/types';
+import type { Context, Theme } from '../Context/types';
 import { Colors } from './colors+spacing+radius';
 
 const defaultTheme: Theme = {
@@ -53,9 +53,9 @@ const defaultDarkTheme: Theme = {
   dark: true,
   colors: {
     primary: {
-      default: Colors.blue_03,
-      light: Colors.blue_07,
-      container: Colors.blue_09,
+      default: Colors.gold_03,
+      light: Colors.gold_07,
+      container: Colors.gold_09,
     },
     secondary: {
       default: Colors.mint_03,

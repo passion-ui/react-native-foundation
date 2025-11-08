@@ -1,6 +1,7 @@
 import { type FC, useContext } from 'react';
 import { Animated } from 'react-native';
-import { ApplicationContext, type DotProps } from '../index';
+import { ApplicationContext } from '../Context';
+import type { DotProps } from './types';
 import styles from './styles';
 
 const Dot: FC<DotProps> = ({ active, style }) => {

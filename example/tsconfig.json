@@ -3,16 +3,12 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@passionui/react-native-foundation": ["../packages/foundation/src"],
-      "@components": ["../example/components"],
-      "@assets": ["../example/assets"],
-      "@screens": ["../example/screens"]
+      "@/*": ["./*"],
+      "@screens": ["./src/screens"],
+      "@components": ["./src/components"],
+      "@assets": ["./src/assets"],
+      "@configs": ["./src/configs"],
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "../packages/foundation/src/**/*.ts",
-    "../packages/foundation/src/**/*.tsx"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
 }

@@ -1,12 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { StyleSheet, View, type ViewStyle } from 'react-native';
-import {
-  ApplicationContext,
-  type DividerProps,
-  SizedBox,
-  Spacing,
-  Styles,
-} from '../index';
+import { ApplicationContext } from '../Context';
+import type { DividerProps } from './types';
+import { SizedBox } from '../SizedBox';
+import { Spacing, Styles } from '../Consts';
 
 const Divider: React.FC<DividerProps> = ({
   size = 1,

@@ -1,6 +1,8 @@
 import { type FC, useContext, useEffect, useRef } from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
-import { ApplicationContext, type ProgressBarProps, Radius } from '../index';
+import { ApplicationContext } from '../Context';
+import type { ProgressBarProps } from './types';
+import { Radius } from '../Consts';
 
 const ProgressBar: FC<ProgressBarProps> = ({ percent = 0, style }) => {
   const { theme } = useContext(ApplicationContext);

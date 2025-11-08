@@ -1,0 +1,77 @@
+name: Release Package
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package to release'
+        required: true
+        type: choice
+        options:
+          - '@passionui/react-native-foundation'
+      release-type:
+        description: 'Release type'
+        required: true
+        type: choice
+        options:
+          - beta
+          - alpha
+          - rc
+          - patch
+          - minor
+          - major
+
+concurrency:
+  group: release-${{ github.event.inputs.package }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Release ${{ github.event.inputs.package }}
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build package
+        uses: ./.github/actions/build-package
+        with:
+          package: ${{ github.event.inputs.package }}
+
+      - name: Release package
+        id: release
+        uses: ./.github/actions/release-package
+        with:
+          package: ${{ github.event.inputs.package }}
+          release-type: ${{ github.event.inputs.release-type }}
+          npm-token: ${{ secrets.NPM_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release summary
+        run: |
+          echo "## 🚀 Release Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Package:** ${{ github.event.inputs.package }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Version:** ${{ steps.release.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Tag:** ${{ steps.release.outputs.tag }}" >> $GITHUB_STEP_SUMMARY
+
+

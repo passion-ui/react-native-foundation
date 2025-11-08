@@ -12,9 +12,11 @@ A comprehensive React Native design system for building beautiful cross-platform
 - 🚀 **Performance Optimized** - Powered by Reanimated for smooth animations
 - 📦 **Tree-Shakeable** - Import only what you need
 
-## 📦 Installation
+## 📦 Quick Start
 
-```sh
+### Installation
+
+```bash
 npm install @passionui/react-native-foundation
 # or
 yarn add @passionui/react-native-foundation
@@ -22,55 +24,66 @@ yarn add @passionui/react-native-foundation
 
 ### Peer Dependencies
 
-Install required peer dependencies:
-
-```sh
-npm install react-native-reanimated react-native-gesture-handler react-native-svg react-native-vector-icons react-native-safe-area-context react-native-linear-gradient @d11/react-native-fast-image react-native-pager-view react-native-worklets
+```bash
+npm install react-native-reanimated react-native-gesture-handler react-native-svg \
+  react-native-safe-area-context react-native-pager-view react-native-worklets
 ```
 
-> **Note:** Please refer to each dependency's official documentation for platform-specific setup instructions.
+### Basic Usage
 
-## 📚 Components
+```tsx
+import { Button, Input, Text } from '@passionui/react-native-foundation';
 
-The library includes 25+ production-ready components organized into categories:
+function App() {
+  return (
+    <>
+      <Text variant="h1">Hello World</Text>
+      <Input placeholder="Enter your name" />
+      <Button onPress={() => alert('Pressed!')}>
+        Click Me
+      </Button>
+    </>
+  );
+}
+```
 
-- **Layout & Structure**: Layout, SizedBox, Divider
-- **Typography**: Text with multiple variants
-- **Buttons**: Button, IconButton
-- **Form Controls**: Input, CheckBox, Radio, Switch
-- **Navigation**: NavigationContainer, StackScreen, BottomTab, ModalScreen, DialogScreen, BottomSheet
-- **Feedback**: Toast, Loading, Skeleton
-- **Data Display**: Badge, Tag, Steps, Stepper, Pagination
-- **Media**: Image, Icon
-- **Utilities**: TabView, SheetPicker, LoopText
+## 📚 Documentation
 
-> For detailed component API and usage examples, see the [documentation](./docs).
-
-## 🔧 Requirements
-
-- **React Native**: 0.70.0 or higher
-- **React**: 18.0.0 or higher
-- **Node.js**: 18+ (recommended)
-
-## 📱 Platform Support
-
-- **iOS**: 13.0+
-- **Android**: API 21+ (Android 5.0+)
-- **Web**: Modern browsers with ES6 support
-
-## 📖 Documentation
-
-- [Component API Reference](./docs) - Detailed component documentation
-- [Example App](./example) - Interactive component showcase
-- [Contributing Guide](./CONTRIBUTING.md) - Development workflow and guidelines
+- **[API Reference](./docs)** - Component APIs and props
+- **[Example App](./example)** - Interactive demos and examples
+- **[Contributing](./CONTRIBUTING.md)** - How to contribute to this project
+- **[Release Process](./RELEASE.md)** - For maintainers releasing new versions
+- **[Changelog](./CHANGELOG.md)** - Version history and release notes
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please read our [Contributing Guide](./CONTRIBUTING.md) and [Code of Conduct](./CODE_OF_CONDUCT.md) before submitting pull requests.
+We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md) for:
+
+- Development setup
+- Branch naming conventions
+- Commit message format
+- Pull request process
+- Code review guidelines
+
+**Quick Start:**
+
+```bash
+git clone https://github.com/your-username/react-native-foundation.git
+npm install
+npm run build:foundation
+npm run example
+```
 
 ## 📝 Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md) for release history and changes.
+See [CHANGELOG.md](./CHANGELOG.md) for release history and breaking changes.
+
+## 💖 Support
+
+- ⭐ **Star this repo** if you find it helpful
+- 🐛 **[Report bugs](https://github.com/passion-ui/react-native-foundation/issues)**
+- 💡 **[Request features](https://github.com/passion-ui/react-native-foundation/issues)**
+- 💬 **[Discussions](https://github.com/passion-ui/react-native-foundation/discussions)**
 
 ## 📄 License
 
