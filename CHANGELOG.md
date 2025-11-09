@@ -1,3 +1,6 @@
+# Changelog
+
+## [0.1.3](https://github.com/passion-ui/react-native-foundation/compare/v0.1.2...v0.1.3) (2025-11-09)
 
 ## [0.1.1-beta.1] - 2024-11-09
 
@@ -33,7 +36,7 @@
 
 ---
 
-## Changelog Format Guide
+# Format Guide
 
 When updating this changelog, use these categories:
 
@@ -103,4 +106,3 @@ Example:
   - Before: `<Button size="large" />`
   - After: `<Button variant="large" />`
 ```
-
