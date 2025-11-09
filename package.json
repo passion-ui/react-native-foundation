@@ -50,6 +50,5 @@
     "tabWidth": 2,
     "trailingComma": "es5",
     "useTabs": false
-  },
-  "version": "0.1.5-alpha.0"
+  }
 }
