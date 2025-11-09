@@ -16,10 +16,7 @@ on:
         options:
           - beta
           - alpha
-          - rc
-          - patch
-          - minor
-          - major
+          - latest
 
 concurrency:
   group: release-${{ github.event.inputs.package }}-${{ github.ref }}

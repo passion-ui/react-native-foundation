@@ -1,13 +1,5 @@
 # Changelog
 
-## 0.1.5-alpha.0 (2025-11-09)
-
-## [0.1.4](https://github.com/passion-ui/react-native-foundation/compare/v0.1.3...v0.1.4) (2025-11-09)
-
-## [0.1.3](https://github.com/passion-ui/react-native-foundation/compare/v0.1.2...v0.1.3) (2025-11-09)
-
-## [0.1.1-beta.1] - 2024-11-09
-
 ### Added
 - Initial beta release
 - Core UI component library (25+ components)
@@ -36,7 +28,6 @@
 
 ## Version Links
 
-[0.1.1-beta.1]: https://github.com/passion-ui/react-native-foundation/releases/tag/v0.1.1-beta.1
 
 ---
 

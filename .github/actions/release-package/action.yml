@@ -6,7 +6,7 @@ inputs:
     description: 'Full package name (e.g., @passionui/react-native-foundation)'
     required: true
   release-type:
-    description: 'Type of release (beta, alpha, rc, patch, minor, major)'
+    description: 'Type of release (latest, beta, alpha)'
     required: true
   npm-token:
     description: 'NPM authentication token'
@@ -45,11 +45,14 @@ runs:
         RELEASE_TYPE="${{ inputs.release-type }}"
 
         case "$RELEASE_TYPE" in
-          beta|alpha|rc)
-            npx release-it --workspace=${{ inputs.package }} --ci --preRelease=$RELEASE_TYPE
+          beta)
+            npx release-it --workspace=${{ inputs.package }} --ci --preRelease=beta
             ;;
-          patch|minor|major)
-            npx release-it --workspace=${{ inputs.package }} --ci $RELEASE_TYPE
+          alpha)
+            npx release-it --workspace=${{ inputs.package }} --ci --preRelease=alpha
+            ;;
+          latest)
+            npx release-it --workspace=${{ inputs.package }} --ci patch
             ;;
         esac
 
@@ -69,10 +72,7 @@ runs:
           alpha)
             DIST_TAG="alpha"
             ;;
-          rc)
-            DIST_TAG="rc"
-            ;;
-          patch|minor|major)
+          latest)
             DIST_TAG="latest"
             ;;
         esac

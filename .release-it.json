@@ -22,7 +22,8 @@
     "publishPath": ".",
     "tag": null,
     "ignoreVersion": false,
-    "skipChecks": false
+    "skipChecks": false,
+    "versionArgs": ["--workspaces false"]
   },
   "plugins": {
     "@release-it/conventional-changelog": {
