@@ -23,7 +23,6 @@
   "npm": {
     "publish": true,
     "publishPath": ".",
-    "tag": null,
     "ignoreVersion": false,
     "skipChecks": false
   },

@@ -76,7 +76,7 @@ runs:
       shell: bash
       run: |
         # Wait a moment for npm registry to update
-        sleep 2
+        sleep 30
 
         # Determine the dist-tag based on release type
         RELEASE_TYPE="${{ inputs.release-type }}"
