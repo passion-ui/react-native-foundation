@@ -5,6 +5,7 @@
   "scripts": {
     "build:foundation": "npm run build --workspace=@passionui/react-native-foundation",
     "clean:foundation": "npm run clean --workspace=@passionui/react-native-foundation",
+    "typecheck:foundation": "npm run typecheck --workspace=@passionui/react-native-foundation",
     "example": "npm start --workspace=example",
     "release:foundation": "release-it --workspace=@passionui/react-native-foundation",
     "release:foundation:beta": "release-it --workspace=@passionui/react-native-foundation --preRelease=beta",

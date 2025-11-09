@@ -6,7 +6,7 @@ inputs:
     description: 'Full package name (e.g., @passionui/react-native-foundation)'
     required: true
   release-type:
-    description: 'Type of release (beta, patch, minor, major, etc.)'
+    description: 'Type of release (beta, alpha, rc, patch, minor, major)'
     required: true
   npm-token:
     description: 'NPM authentication token'
@@ -26,25 +26,15 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Configure Git
+    - name: Configure Git and NPM
       shell: bash
       run: |
+        # Configure Git
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
 
-    - name: Configure NPM
-      shell: bash
-      run: |
+        # Configure NPM
         echo "//registry.npmjs.org/:_authToken=${{ inputs.npm-token }}" > ~/.npmrc
-
-    - name: Get package short name
-      id: pkg-name
-      shell: bash
-      run: |
-        # Extract short name from package
-        # @passionui/react-native-foundation -> foundation
-        SHORT_NAME=$(echo "${{ inputs.package }}" | sed 's/@passionui\/react-native-//')
-        echo "short=$SHORT_NAME" >> $GITHUB_OUTPUT
 
     - name: Release package
       shell: bash
@@ -52,16 +42,14 @@ runs:
         GITHUB_TOKEN: ${{ inputs.github-token }}
         NPM_TOKEN: ${{ inputs.npm-token }}
       run: |
-        # Use root workspace script that handles directory
         RELEASE_TYPE="${{ inputs.release-type }}"
-        SHORT_NAME="${{ steps.pkg-name.outputs.short }}"
 
         case "$RELEASE_TYPE" in
           beta|alpha|rc)
-            npm run release:${SHORT_NAME}:${RELEASE_TYPE}
+            release-it --workspace=${{ inputs.package }} --ci --preRelease=$RELEASE_TYPE
             ;;
           patch|minor|major)
-            npm run release:${SHORT_NAME}:${RELEASE_TYPE}
+            release-it --workspace=${{ inputs.package }} --ci $RELEASE_TYPE
             ;;
         esac
 
@@ -69,7 +57,6 @@ runs:
       id: get-version
       shell: bash
       run: |
-        # Read version from package.json in workspace
         VERSION=$(npm pkg get version --workspace=${{ inputs.package }} | tr -d '"')
         echo "version=$VERSION" >> $GITHUB_OUTPUT
         echo "tag=v$VERSION" >> $GITHUB_OUTPUT
