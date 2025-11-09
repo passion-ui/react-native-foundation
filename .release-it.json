@@ -1,13 +1,14 @@
 {
   "git": {
-    "commitMessage": "chore: release v${version}",
+    "commitMessage": "chore: release ${name} ${tag}",
     "tagName": "v${version}",
     "tagAnnotation": "Release v${version}",
     "push": true,
     "requireBranch": "main",
     "requireCleanWorkingDir": false,
     "requireUpstream": true,
-    "addUntrackedFiles": false
+    "addUntrackedFiles": false,
+    "commitArgs": ["--no-verify"]
   },
   "github": {
     "release": true,
@@ -22,8 +23,7 @@
     "publishPath": ".",
     "tag": null,
     "ignoreVersion": false,
-    "skipChecks": false,
-    "versionArgs": ["--workspaces false"]
+    "skipChecks": false
   },
   "plugins": {
     "@release-it/conventional-changelog": {

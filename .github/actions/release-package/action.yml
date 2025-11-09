@@ -3,7 +3,7 @@ description: 'Release a package using release-it'
 
 inputs:
   package:
-    description: 'Full package name (e.g., @passionui/react-native-foundation)'
+    description: 'Package short name (e.g., foundation)'
     required: true
   release-type:
     description: 'Type of release (latest, beta, alpha)'
@@ -16,6 +16,9 @@ inputs:
     required: true
 
 outputs:
+  name:
+    description: 'The package name'
+    value: ${{ steps.pkg-dir.outputs.name }}
   version:
     description: 'The released version'
     value: ${{ steps.get-version.outputs.version }}
@@ -36,8 +39,17 @@ runs:
         # Configure NPM
         echo "//registry.npmjs.org/:_authToken=${{ inputs.npm-token }}" > ~/.npmrc
 
+    - name: Get package directory
+      id: pkg-dir
+      shell: bash
+      run: |
+        # Get full package name from package.json
+        NAME=$(node -p "require('./packages/${{ inputs.package }}/package.json').name")
+        echo "name=$NAME" >> $GITHUB_OUTPUT
+
     - name: Release package
       shell: bash
+      working-directory: packages/${{ inputs.package }}
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
         NPM_TOKEN: ${{ inputs.npm-token }}
@@ -46,13 +58,13 @@ runs:
 
         case "$RELEASE_TYPE" in
           beta)
-            npx release-it --workspace=${{ inputs.package }} --ci --preRelease=beta
+            npx release-it --ci --preRelease=beta
             ;;
           alpha)
-            npx release-it --workspace=${{ inputs.package }} --ci --preRelease=alpha
+            npx release-it --ci --preRelease=alpha
             ;;
           latest)
-            npx release-it --workspace=${{ inputs.package }} --ci patch
+            npx release-it --ci patch
             ;;
         esac
 
@@ -78,7 +90,7 @@ runs:
         esac
 
         # Get version from npm registry using the dist-tag
-        VERSION=$(npm view ${{ inputs.package }}@${DIST_TAG} version)
+        VERSION=$(npm view ${{ steps.pkg-dir.outputs.name }}@${DIST_TAG} version)
 
         echo "version=$VERSION" >> $GITHUB_OUTPUT
         echo "tag=v$VERSION" >> $GITHUB_OUTPUT

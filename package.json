@@ -7,9 +7,9 @@
     "clean:foundation": "npm run clean --workspace=@passionui/react-native-foundation",
     "typecheck:foundation": "npm run typecheck --workspace=@passionui/react-native-foundation",
     "example": "npm start --workspace=example",
-    "release:foundation:latest": "npx release-it --workspace=@passionui/react-native-foundation patch",
-    "release:foundation:beta": "npx release-it --workspace=@passionui/react-native-foundation --preRelease=beta",
-    "release:foundation:alpha": "npx release-it --workspace=@passionui/react-native-foundation --preRelease=alpha"
+    "release:foundation:latest": "cd packages/foundation && npx release-it --ci patch",
+    "release:foundation:beta": "cd packages/foundation && npx release-it --ci --preRelease=beta",
+    "release:foundation:alpha": "cd packages/foundation && npx release-it --ci --preRelease=alpha"
   },
   "keywords": [
     "react-native",
@@ -50,6 +50,5 @@
     "tabWidth": 2,
     "trailingComma": "es5",
     "useTabs": false
-  },
-  "version": "0.1.5-beta.0"
+  }
 }
