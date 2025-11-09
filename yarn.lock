@@ -2020,11 +2020,6 @@
   dependencies:
     "@octokit/openapi-types" "^27.0.0"
 
-"@passionui/react-native-foundation@*":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@passionui/react-native-foundation/-/react-native-foundation-0.1.1.tgz#9985eb822bdd02dfd67e2cb6e09a95d83301af6c"
-  integrity sha512-3VUA0V0xNc9MsoJFijazMG4LoeZnPR/SnjXrRf4AKroztfTaTAR54oKlJOQ83A967xL1WmkDuGM5LfrA7ufZKQ==
-
 "@phun-ky/typeof@2.0.3":
   version "2.0.3"
   resolved "https://registry.npmjs.org/@phun-ky/typeof/-/typeof-2.0.3.tgz"
