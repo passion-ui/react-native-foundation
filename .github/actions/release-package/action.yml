@@ -36,11 +36,9 @@ runs:
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
 
-        # Configure NPM globally
+        # Configure NPM authentication globally (for npm view commands)
         echo "//registry.npmjs.org/:_authToken=${{ inputs.npm-token }}" > ~/.npmrc
 
-        # Also create .npmrc in package directory for release-it
-        echo "//registry.npmjs.org/:_authToken=${{ inputs.npm-token }}" > packages/${{ inputs.package }}/.npmrc
 
     - name: Get package directory
       id: pkg-dir
@@ -102,7 +100,5 @@ runs:
     - name: Cleanup NPM config
       if: always()
       shell: bash
-      run: |
-        rm -f ~/.npmrc
-        rm -f packages/${{ inputs.package }}/.npmrc
+      run: rm -f ~/.npmrc
 
