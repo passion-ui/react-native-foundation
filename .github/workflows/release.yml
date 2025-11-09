@@ -8,7 +8,7 @@ on:
         required: true
         type: choice
         options:
-          - '@passionui/react-native-foundation'
+          - foundation
       release-type:
         description: 'Release type'
         required: true
@@ -67,7 +67,7 @@ jobs:
         run: |
           echo "## 🚀 Release Complete" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Package:** ${{ github.event.inputs.package }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Package:** ${{ steps.release.outputs.version }}" >> $GITHUB_STEP_SUMMARY
           echo "**Version:** ${{ steps.release.outputs.version }}" >> $GITHUB_STEP_SUMMARY
           echo "**Tag:** ${{ steps.release.outputs.tag }}" >> $GITHUB_STEP_SUMMARY
 

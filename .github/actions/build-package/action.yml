@@ -3,7 +3,7 @@ description: 'Build and typecheck a package using workspace name'
 
 inputs:
   package:
-    description: 'Full package name (e.g., @passionui/react-native-foundation)'
+    description: 'Package short name (e.g., foundation)'
     required: true
 
 runs:
@@ -11,13 +11,16 @@ runs:
   steps:
     - name: Clean package
       shell: bash
-      run: npm run clean --workspace=${{ inputs.package }}
+      working-directory: packages/${{ inputs.package }}
+      run: npm run clean
 
     - name: Type check package
       shell: bash
-      run: npm run typecheck --workspace=${{ inputs.package }}
+      working-directory: packages/${{ inputs.package }}
+      run: npm run typecheck
 
     - name: Build package
       shell: bash
-      run: npm run build --workspace=${{ inputs.package }}
+      working-directory: packages/${{ inputs.package }}
+      run: npm run build
 

@@ -1,13 +1,16 @@
 {
   "git": {
-    "commitMessage": "chore: release v${version}",
+    "commit": true,
+    "commitMessage": "chore: release ${name} ${tag}",
+    "tag": true,
     "tagName": "v${version}",
     "tagAnnotation": "Release v${version}",
     "push": true,
     "requireBranch": "main",
     "requireCleanWorkingDir": false,
     "requireUpstream": true,
-    "addUntrackedFiles": false
+    "addUntrackedFiles": false,
+    "commitArgs": ["--no-verify"]
   },
   "github": {
     "release": true,
@@ -22,8 +25,19 @@
     "publishPath": ".",
     "tag": null,
     "ignoreVersion": false,
-    "skipChecks": false,
-    "versionArgs": ["--workspaces false"]
+    "skipChecks": false
+  },
+  "hooks": {
+    "after:release": [
+      "echo ''",
+      "echo '🎉 Release ${version} completed successfully!'",
+      "echo ''",
+      "echo '📦 Package: ${name}@${version}'",
+      "echo '🔗 npm: https://www.npmjs.com/package/${name}/v/${version}'",
+      "echo '🔗 GitHub: ${github.releaseUrl}'",
+      "echo ''",
+      "echo 'Install with: npm install ${name}@${version}'"
+    ]
   },
   "plugins": {
     "@release-it/conventional-changelog": {
