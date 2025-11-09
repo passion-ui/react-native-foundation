@@ -57,9 +57,32 @@ runs:
       id: get-version
       shell: bash
       run: |
-        VERSION=$(npm pkg get version --workspace=${{ inputs.package }} | tr -d '"')
+        # Wait a moment for npm registry to update
+        sleep 2
+
+        # Determine the dist-tag based on release type
+        RELEASE_TYPE="${{ inputs.release-type }}"
+        case "$RELEASE_TYPE" in
+          beta)
+            DIST_TAG="beta"
+            ;;
+          alpha)
+            DIST_TAG="alpha"
+            ;;
+          rc)
+            DIST_TAG="rc"
+            ;;
+          patch|minor|major)
+            DIST_TAG="latest"
+            ;;
+        esac
+
+        # Get version from npm registry using the dist-tag
+        VERSION=$(npm view ${{ inputs.package }}@${DIST_TAG} version)
+
         echo "version=$VERSION" >> $GITHUB_OUTPUT
         echo "tag=v$VERSION" >> $GITHUB_OUTPUT
+        echo "✅ Published version: $VERSION (dist-tag: $DIST_TAG)"
 
     - name: Cleanup NPM config
       if: always()
