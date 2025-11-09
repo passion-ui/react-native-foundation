@@ -22,9 +22,6 @@ outputs:
   version:
     description: 'The released version'
     value: ${{ steps.get-version.outputs.version }}
-  tag:
-    description: 'The git tag created'
-    value: ${{ steps.get-version.outputs.tag }}
 
 runs:
   using: composite
@@ -56,8 +53,6 @@ runs:
         NPM_TOKEN: ${{ inputs.npm-token }}
       run: |
         RELEASE_TYPE="${{ inputs.release-type }}"
-
-        git status
 
         case "$RELEASE_TYPE" in
           beta)
@@ -96,8 +91,6 @@ runs:
         VERSION=$(npm view ${{ steps.pkg-dir.outputs.name }}@${DIST_TAG} version)
 
         echo "version=$VERSION" >> $GITHUB_OUTPUT
-        echo "tag=v$VERSION" >> $GITHUB_OUTPUT
-        echo "✅ Published version: $VERSION (dist-tag: $DIST_TAG)"
 
     - name: Cleanup NPM config
       if: always()
