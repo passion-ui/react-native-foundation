@@ -46,10 +46,10 @@ runs:
 
         case "$RELEASE_TYPE" in
           beta|alpha|rc)
-            release-it --workspace=${{ inputs.package }} --ci --preRelease=$RELEASE_TYPE
+            npx release-it --workspace=${{ inputs.package }} --ci --preRelease=$RELEASE_TYPE
             ;;
           patch|minor|major)
-            release-it --workspace=${{ inputs.package }} --ci $RELEASE_TYPE
+            npx release-it --workspace=${{ inputs.package }} --ci $RELEASE_TYPE
             ;;
         esac
 

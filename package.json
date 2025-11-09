@@ -7,13 +7,13 @@
     "clean:foundation": "npm run clean --workspace=@passionui/react-native-foundation",
     "typecheck:foundation": "npm run typecheck --workspace=@passionui/react-native-foundation",
     "example": "npm start --workspace=example",
-    "release:foundation": "release-it --workspace=@passionui/react-native-foundation",
-    "release:foundation:beta": "release-it --workspace=@passionui/react-native-foundation --preRelease=beta",
-    "release:foundation:alpha": "release-it --workspace=@passionui/react-native-foundation --preRelease=alpha",
-    "release:foundation:rc": "release-it --workspace=@passionui/react-native-foundation --preRelease=rc",
-    "release:foundation:patch": "release-it --workspace=@passionui/react-native-foundation patch",
-    "release:foundation:minor": "release-it --workspace=@passionui/react-native-foundation minor",
-    "release:foundation:major": "release-it --workspace=@passionui/react-native-foundation major"
+    "release:foundation": "npx release-it --workspace=@passionui/react-native-foundation",
+    "release:foundation:beta": "npx release-it --workspace=@passionui/react-native-foundation --preRelease=beta",
+    "release:foundation:alpha": "npx release-it --workspace=@passionui/react-native-foundation --preRelease=alpha",
+    "release:foundation:rc": "npx release-it --workspace=@passionui/react-native-foundation --preRelease=rc",
+    "release:foundation:patch": "npx release-it --workspace=@passionui/react-native-foundation patch",
+    "release:foundation:minor": "npx release-it --workspace=@passionui/react-native-foundation minor",
+    "release:foundation:major": "npx release-it --workspace=@passionui/react-native-foundation major"
   },
   "keywords": [
     "react-native",
