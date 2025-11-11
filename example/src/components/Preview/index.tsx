@@ -77,3 +77,4 @@ const Preview: React.FC<any> = ({ navigation, component, data }) => {
 };
 
 export default Preview;
+export type { PreviewProps } from './types';

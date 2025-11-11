@@ -7,7 +7,7 @@
       "@screens": ["./src/screens"],
       "@components": ["./src/components"],
       "@assets": ["./src/assets"],
-      "@configs": ["./src/configs"],
+      "@configs": ["./src/configs"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]

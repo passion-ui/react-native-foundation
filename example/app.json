@@ -38,6 +38,18 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "29caaeb9-45a0-4366-88c0-1d80eef99f25"
+      }
+    },
+    "owner": "passionui",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/29caaeb9-45a0-4366-88c0-1d80eef99f25"
     }
   }
 }

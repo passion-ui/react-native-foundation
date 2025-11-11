@@ -207,3 +207,5 @@ const Playground: React.FC<any> = ({
 };
 
 export default Playground;
+
+export type { PlaygroundProps } from './types';
