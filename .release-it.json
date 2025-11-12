@@ -5,7 +5,7 @@
     "tagAnnotation": "Release v${version}",
     "push": true,
     "requireBranch": "main",
-    "requireCleanWorkingDir": false,
+    "requireCleanWorkingDir": true,
     "requireUpstream": true,
     "addUntrackedFiles": false
   },
