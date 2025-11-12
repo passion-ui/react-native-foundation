@@ -17,7 +17,6 @@
     "draft": false,
     "tokenRef": "GITHUB_TOKEN"
   },
-  "npm": false,
   "plugins": {
     "@release-it-plugins/workspaces": {
       "publish": true,
