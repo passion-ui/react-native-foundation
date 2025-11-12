@@ -12,15 +12,15 @@ runs:
     - name: Clean package
       shell: bash
       working-directory: packages/${{ inputs.package }}
-      run: npm run clean
+      run: yarn run clean
 
     - name: Type check package
       shell: bash
       working-directory: packages/${{ inputs.package }}
-      run: npm run typecheck
+      run: yarn run typecheck
 
     - name: Build package
       shell: bash
       working-directory: packages/${{ inputs.package }}
-      run: npm run build
+      run: yarn run build
 
