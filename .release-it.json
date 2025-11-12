@@ -17,13 +17,12 @@
     "draft": false,
     "tokenRef": "GITHUB_TOKEN"
   },
-  "npm": {
-    "publish": true,
-    "publishPath": ".",
-    "ignoreVersion": false,
-    "skipChecks": false
-  },
+  "npm": false,
   "plugins": {
+    "@release-it-plugins/workspaces": {
+      "publish": true,
+      "skipChecks": false
+    },
     "@release-it/conventional-changelog": {
       "preset": {
         "name": "angular"
