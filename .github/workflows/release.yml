@@ -46,12 +46,12 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn all
 
-      - name: Build package
-        uses: ./.github/actions/build-package
-        with:
-          package: ${{ github.event.inputs.package }}
+#      - name: Build package
+#        uses: ./.github/actions/build-package
+#        with:
+#          package: ${{ github.event.inputs.package }}
 
       - name: Release package
         id: release
