@@ -3,10 +3,13 @@
   "private": true,
   "description": "React Native Foundation - Monorepo workspace",
   "scripts": {
-    "build:foundation": "npm run build --workspace=@passionui/react-native-foundation",
-    "clean:foundation": "npm run clean --workspace=@passionui/react-native-foundation",
-    "typecheck:foundation": "npm run typecheck --workspace=@passionui/react-native-foundation",
-    "example": "npm start --workspace=example",
+    "clean": "rm -rf node_modules yarn.lock example/node_modules packages/*/node_modules packages/*/lib",
+    "all": "yarn clean && yarn install && yarn build:foundation",
+    "build:foundation": "yarn workspace @passionui/react-native-foundation build",
+    "clean:foundation": "yarn workspace @passionui/react-native-foundation clean",
+    "typecheck:foundation": "yarn workspace @passionui/react-native-foundation typecheck",
+    "example": "yarn workspace example start",
+    "workspaces:info": "yarn workspaces info",
     "release:foundation:latest": "cd packages/foundation && npx release-it --ci patch",
     "release:foundation:beta": "cd packages/foundation && npx release-it --ci --preRelease=beta",
     "release:foundation:alpha": "cd packages/foundation && npx release-it --ci --preRelease=alpha"
@@ -30,19 +33,32 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "workspaces": [
-    "example",
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "example",
+      "packages/*"
+    ]
+  },
   "devDependencies": {
+    "@babel/core": "^7.28.0",
     "@release-it/conventional-changelog": "^10.0.1",
     "@types/jest": "^29.5.14",
-    "@types/react": "^19.1.12",
+    "@types/react": "^19.2.0",
     "del-cli": "^5.1.0",
+    "eslint": "^9.25.0",
+    "eslint-config-expo": "~10.0.0",
     "prettier": "^3.6.2",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native": "0.81.5",
     "react-native-builder-bob": "^0.40.13",
     "release-it": "^19.0.4",
-    "typescript": "^5.9.2"
+    "typescript": "~5.9.2"
+  },
+  "resolutions": {
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native": "0.81.5"
   },
   "prettier": {
     "quoteProps": "consistent",
