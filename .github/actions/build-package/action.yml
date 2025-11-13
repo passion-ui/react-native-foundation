@@ -9,18 +9,13 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Clean package
-      shell: bash
-      working-directory: packages/${{ inputs.package }}
-      run: yarn run clean
-
     - name: Type check package
       shell: bash
       working-directory: packages/${{ inputs.package }}
-      run: yarn run typecheck
+      run: npm run typecheck
 
     - name: Build package
       shell: bash
       working-directory: packages/${{ inputs.package }}
-      run: yarn run build
+      run: npm run build
 

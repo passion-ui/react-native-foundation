@@ -59,7 +59,7 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: yarn install
+        run: npm install --legacy-peer-deps
 
       - name: Detect changed packages and verify
         id: verify

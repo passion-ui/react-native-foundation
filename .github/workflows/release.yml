@@ -46,7 +46,7 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: yarn clean && yarn install
+        run: npm run clean && npm install --legacy-peer-deps
 
       - name: Build package
         uses: ./.github/actions/build-package
