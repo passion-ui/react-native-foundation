@@ -12,7 +12,6 @@
   "github": {
     "release": true,
     "releaseName": "v${version}",
-    "releaseNotes": null,
     "autoGenerate": true,
     "draft": false,
     "tokenRef": "GITHUB_TOKEN"

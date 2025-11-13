@@ -67,9 +67,6 @@
     "react-native-svg": "15.12.1",
     "react-native-worklets": "0.5.1"
   },
-  "overrides": {
-    "react-native-worklets": "0.5.1"
-  },
   "prettier": {
     "quoteProps": "consistent",
     "singleQuote": true,
