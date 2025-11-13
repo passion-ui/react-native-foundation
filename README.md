@@ -1,51 +1,65 @@
-# @passionui/react-native-foundation
+# React Native Foundation
 
-A comprehensive React Native design system for building beautiful cross-platform applications.
+A comprehensive React Native design system monorepo for building beautiful cross-platform applications.
+
+### @passionui/react-native-foundation
 
 ## ✨ Features
 
-- 🎨 **25+ Production-Ready Components** - Complete UI component library
-- 🎯 **TypeScript First** - Full type safety and excellent IDE support
-- 🌗 **Theming Support** - Customizable design tokens with dark mode
-- 🌍 **Internationalization** - Built-in i18n support with react-i18next
-- 📱 **Cross-Platform** - iOS, Android, and Web compatible
-- 🚀 **Performance Optimized** - Powered by Reanimated for smooth animations
-- 📦 **Tree-Shakeable** - Import only what you need
+#### 🎨 **30+ Production-Ready Components**
+Complete UI component library including:
+- **Form Components**: Button, Input, CheckBox, Radio, Switch, Stepper
+- **Display Components**: Text, Image, Badge, Tag, Skeleton, Divider
+- **Navigation**: NavigationContainer, StackScreen, BottomTab, ModalScreen, BottomSheet
+- **Feedback**: Toast, Loading, Popup, SheetPicker
+- **Layout**: Layout, Grid, SizedBox
+- **Advanced**: TabView, Pagination, Steps, LoopText
 
-## 📦 Quick Start
+#### 🎯 **TypeScript First**
+- Full type safety with comprehensive TypeScript definitions
+- Excellent IDE autocomplete support
+- Type-safe component props and theming
 
-### Installation
+#### 🌗 **Built-in Theming System**
+- Light and Dark mode support out of the box
+- Customizable design tokens
+- Context-based theme management
+- Dynamic theme switching
 
-```bash
-npm install @passionui/react-native-foundation
-# or
-yarn add @passionui/react-native-foundation
-```
+#### 🌍 **Internationalization (i18n)**
+- Built-in localization support with react-i18next
+- Easy language switching
+- Multiple language support
 
-### Peer Dependencies
+#### 🧭 **Navigation Components**
+- Pre-built navigation wrappers for React Navigation
+- Stack, Tab, Modal, and BottomSheet navigation
+- Consistent navigation patterns across your app
 
-```bash
-npm install react-native-reanimated react-native-gesture-handler react-native-svg \
-  react-native-safe-area-context react-native-pager-view react-native-worklets
-```
+#### 🎭 **Flexible Image & Icon Adapters**
+- **Expo**: Auto-detects and uses `expo-image`, `@expo/vector-icons`, `expo-linear-gradient`
+- **React Native CLI**: Supports `@d11/react-native-fast-image`, `react-native-vector-icons`, `react-native-linear-gradient`
+- Automatic platform detection and adapter selection
 
-### Basic Usage
+#### 🚀 **Performance Optimized**
+- Powered by Reanimated 4 for smooth 60fps animations
+- Optimized re-renders with React Context
+- Tree-shakeable architecture
 
-```tsx
-import { Button, Input, Text } from '@passionui/react-native-foundation';
+#### 📱 **Cross-Platform**
+- iOS, Android, and Web compatible
+- Platform-specific optimizations
+- Consistent UX across platforms
 
-function App() {
-  return (
-    <>
-      <Text variant="h1">Hello World</Text>
-      <Input placeholder="Enter your name" />
-      <Button onPress={() => alert('Pressed!')}>
-        Click Me
-      </Button>
-    </>
-  );
-}
-```
+## 🚀 Getting Started
+
+See the [Foundation Package Documentation](./packages/foundation/README.md) for:
+- Installation instructions (Expo & React Native CLI)
+- Setup guides and configuration
+- Usage examples and API reference
+- Theming and localization guides
+
+Or check out the [Example App](./example) for live demos of all components.
 
 ## 📚 Documentation
 
