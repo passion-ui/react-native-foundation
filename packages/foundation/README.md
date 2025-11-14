@@ -220,7 +220,24 @@ function App() {
 
 ```tsx
 import { useRef } from 'react';
-import { NavigationContainer, Navigator, Localization } from '@passionui/react-native-foundation';
+import {
+  NavigationContainer,
+  Navigator,
+  Localization,
+  Button,
+  Text
+} from '@passionui/react-native-foundation';
+
+function HomeScreen() {
+  return (
+    <View>
+      <Text variant="h1">Hello World</Text>
+      <Button onPress={() => alert('Pressed!')}>
+        Click Me
+      </Button>
+    </>
+  );
+}
 
 export default function App() {
   const navigator = new Navigator({
@@ -248,17 +265,32 @@ export default function App() {
     fallbackLng: 'en',
   });
 
-  // Change language dynamically
-  // localization.changeLanguage('vi');
+  const customTheme = {
+    colors: {
+      primary: {
+        default: '#007AFF',
+        light: '#4DA2FF',
+        container: '#99CAFF',
+      },
+      secondary: {
+        default: '#5856D6',
+        light: '#7D7BEB',
+        container: '#B3B2F5',
+      },
+    },
+    dark: false,
+  };
 
   return (
     <NavigationContainer
       navigator={navigator}
       localization={localization}
+      theme={customTheme}
       screen={HomeScreen}
     />
   );
 }
+
 ```
 
 ## 📚 Documentation
