@@ -132,104 +132,6 @@ import {
 
 function HomeScreen() {
   return (
-    <>
-      <Text variant="h1">Hello World</Text>
-      <Button onPress={() => alert('Pressed!')}>
-        Click Me
-      </Button>
-    </>
-  );
-}
-
-export default function App() {
-  const navigator = new Navigator({
-    ref: useRef(undefined),
-    loadingRef: useRef(undefined),
-    toastRef: useRef(undefined),
-  });
-
-  const localization = new Localization({
-    resources: {
-      en: {
-        translation: {
-          welcome: 'Welcome',
-        },
-      },
-    },
-    lng: 'en',
-  });
-
-  return (
-    <NavigationContainer
-      navigator={navigator}
-      localization={localization}
-      screen={HomeScreen}
-    />
-  );
-}
-```
-
-### Theming
-
-```tsx
-import { useRef } from 'react';
-import { NavigationContainer, Navigator, Localization } from '@passionui/react-native-foundation';
-
-const customTheme = {
-  colors: {
-    primary: {
-      default: '#007AFF',
-      light: '#4DA2FF',
-      container: '#99CAFF',
-    },
-    secondary: {
-      default: '#5856D6',
-      light: '#7D7BEB',
-      container: '#B3B2F5',
-    },
-  },
-  dark: false,
-};
-
-function App() {
-  const navigator = new Navigator({
-    ref: useRef(undefined),
-    loadingRef: useRef(undefined),
-    toastRef: useRef(undefined),
-  });
-
-  const localization = new Localization({
-    resources: {
-      en: { translation: { welcome: 'Welcome' } },
-    },
-    lng: 'en',
-  });
-
-  return (
-    <NavigationContainer
-      navigator={navigator}
-      localization={localization}
-      theme={customTheme}
-      screen={HomeScreen}
-    />
-  );
-}
-```
-
-### Localization
-
-```tsx
-import { useRef } from 'react';
-import {
-  NavigationContainer,
-  Navigator,
-  Localization,
-  Button,
-  Text
-} from '@passionui/react-native-foundation';
-
-function HomeScreen() {
-  return (
     <View>
       <Text variant="h1">Hello World</Text>
       <Button onPress={() => alert('Pressed!')}>
@@ -290,7 +192,6 @@ export default function App() {
     />
   );
 }
-
 ```
 
 ## 📚 Documentation
