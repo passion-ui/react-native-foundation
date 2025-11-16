@@ -2,8 +2,10 @@ import {
   ApplicationContext,
   Container,
   ContainerList,
+  HeaderRightAction,
   Image,
   Item,
+  NavigationButton,
   Radius,
   Screen,
   ScreenContainerProps,
@@ -16,17 +18,26 @@ import {
 
 import React, { useContext, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-
-const HeaderBackground = [
-  'https://static.momocdn.net/app/img/kits/background/header/header_Tet_2024_transparent.png',
-];
+import Setting from '../Setting';
 
 const StylesGuide: React.FC<ScreenContainerProps> = ({ navigation }) => {
-  const { theme, translate } = useContext(ApplicationContext);
+  const { navigator, theme, translate } = useContext(ApplicationContext);
 
   useEffect(() => {
     navigation?.setOptions({
       title: translate('style_guide'),
+      headerRight: () => {
+        return (
+          <HeaderRightAction>
+            <NavigationButton
+              icon={'cog-outline'}
+              onPress={() => {
+                navigator?.push({ screen: Setting });
+              }}
+            />
+          </HeaderRightAction>
+        );
+      },
     });
   }, [navigation]);
 
@@ -36,11 +47,9 @@ const StylesGuide: React.FC<ScreenContainerProps> = ({ navigation }) => {
       scrollable={true}
       scrollViewProps={{ contentContainerStyle: Styles.paddingVerticalM }}
     >
-      <ContainerList
+      <Container
         padding={Spacing.M}
         margin={Spacing.M}
-        scrollEnabled={false}
-        widthSpan={6}
         style={[
           Shadow.light,
           {
@@ -48,35 +57,24 @@ const StylesGuide: React.FC<ScreenContainerProps> = ({ navigation }) => {
             backgroundColor: theme.colors.background.surface,
           },
         ]}
-        data={HeaderBackground}
-        ListHeaderComponent={
-          <Item>
-            <Text typography={'headline'} fontWeight="bold">
-              Header Background
-            </Text>
-            <SizedBox height={Spacing.S} />
-          </Item>
-        }
-        renderItem={({ item }) => {
-          const link = (theme.assets?.headerBackground as any)?.uri;
-          const selected = link === item;
-          return (
-            <Image
-              style={[
-                styles.box,
-                {
-                  borderColor: selected
-                    ? theme.colors.primary.default
-                    : theme.colors.border.default,
-                },
-              ]}
-              source={{ uri: item }}
-              resizeMode={'contain'}
-            />
-          );
-        }}
-        keyExtractor={(item) => `header-background${item}`}
-      />
+      >
+        <Item>
+          <Text typography={'headline'} fontWeight="bold">
+            Header Background
+          </Text>
+          <SizedBox height={Spacing.S} />
+          <Image
+            style={[
+              styles.box,
+              {
+                borderColor: theme.colors.border.default,
+              },
+            ]}
+            source={{ uri: theme.assets?.headerBackground?.uri }}
+            resizeMode={'contain'}
+          />
+        </Item>
+      </Container>
       <SizedBox height={Spacing.M} />
       <ContainerList
         padding={Spacing.M}

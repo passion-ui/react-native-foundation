@@ -16,7 +16,7 @@ import {
 import { ListTitle } from '@components';
 import { DeviceEventEmitter, View } from 'react-native';
 import styles from './styles';
-import { SettingTheme } from '@screens';
+import SettingTheme from '../SettingTheme';
 import { Settings } from '@configs';
 
 const Setting: React.FC<ScreenContainerProps> = ({ navigation }) => {

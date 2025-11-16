@@ -1,54 +1,16 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
-  ApplicationContext,
-  BottomTab,
-  BottomTabItemProps,
   defaultDarkTheme,
   defaultTheme,
   Localization,
   NavigationContainer,
   Navigator,
-  ScreenContainerProps,
 } from '@passionui/react-native-foundation';
-import { Components, Motions, Setting, StylesGuide } from '@screens';
-import { DATA } from './screens/Components';
 import { DeviceEventEmitter } from 'react-native';
 import Assets from './assets';
 import { Settings } from '@configs';
 import tinycolor from 'tinycolor2';
-
-const Main: React.FC<ScreenContainerProps> = ({ navigation }) => {
-  const { translate } = useContext(ApplicationContext);
-  const tabs: BottomTabItemProps[] = [
-    {
-      name: 'Styles',
-      title: translate('style_guide'),
-      icon: 'palette-swatch-outline',
-      screen: StylesGuide,
-    },
-    {
-      name: 'Components',
-      title: translate('components'),
-      icon: 'shape-outline',
-      tabBarBadge: DATA.length,
-      screen: Components,
-    },
-    {
-      name: 'Motions',
-      title: translate('motions'),
-      icon: 'transition',
-      screen: Motions,
-    },
-    {
-      name: 'Settings',
-      title: translate('settings'),
-      icon: 'cog-outline',
-      screen: Setting,
-    },
-  ];
-
-  return <BottomTab tabs={tabs} navigation={navigation} />;
-};
+import MainTab from './screens/tabs';
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState(defaultTheme);
@@ -63,8 +25,9 @@ const App: React.FC = () => {
     );
     const listenerTheme = DeviceEventEmitter?.addListener(
       'onChangeTheme',
-      ({ dark, font, primary, secondary }) => {
+      ({ dark, font, primary, secondary, headerBackground }: any) => {
         let data = theme;
+
         if (dark !== undefined) {
           data = {
             ...data,
@@ -72,6 +35,7 @@ const App: React.FC = () => {
             dark: dark,
           };
         }
+
         if (font) {
           data = { ...data, font: font };
         }
@@ -83,6 +47,16 @@ const App: React.FC = () => {
               ...data.colors,
               primary: buildColorSchema(primary),
               secondary: buildColorSchema(secondary),
+            },
+          };
+        }
+
+        if (headerBackground) {
+          data = {
+            ...data,
+            assets: {
+              ...data.assets,
+              headerBackground: headerBackground,
             },
           };
         }
@@ -122,7 +96,7 @@ const App: React.FC = () => {
     <NavigationContainer
       navigator={navigator}
       theme={theme}
-      screen={Main}
+      screen={MainTab}
       localization={localization}
     />
   );

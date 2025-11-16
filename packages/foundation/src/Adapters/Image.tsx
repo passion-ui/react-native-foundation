@@ -1,4 +1,4 @@
-import type { FastImageProps } from '@d11/react-native-fast-image';
+import type { FastImageProps, Source } from '@d11/react-native-fast-image';
 import type { ImageProps as ExpoImageProps } from 'expo-image';
 
 let Image: any;
@@ -14,4 +14,4 @@ try {
 export { Image };
 
 export type ImageProps = FastImageProps & ExpoImageProps;
-export type ImageSource = FastImageProps['source'] & ExpoImageProps['source'];
+export type ImageSource = Source;

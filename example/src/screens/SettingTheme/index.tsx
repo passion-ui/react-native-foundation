@@ -15,15 +15,25 @@ import {
   Styles,
   Switch,
   Text,
+  Image,
 } from '@passionui/react-native-foundation';
 import { ListTitle, PopupPickerColor } from '@components';
-import { DeviceEventEmitter, View } from 'react-native';
+import {
+  DeviceEventEmitter,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import styles from './styles';
 import { Settings } from '@configs';
 
+const IMAGE_HEADER_BACKGROUND = [
+  '',
+  'https://static.momocdn.net/app/img/kits/background/header/header_Tet_2024_transparent.png',
+];
+
 const SettingTheme: React.FC<ScreenContainerProps> = ({ navigation }) => {
   const { theme, navigator, translate } = useContext(ApplicationContext);
-
   const [custom, setCustom] = useState<any>(false);
 
   useEffect(() => {
@@ -197,6 +207,51 @@ const SettingTheme: React.FC<ScreenContainerProps> = ({ navigation }) => {
       style={Styles.paddingM}
       scrollable={true}
     >
+      <View
+        style={[
+          Shadow.light,
+          {
+            backgroundColor: theme.colors.background.surface,
+            padding: Spacing.M,
+            borderRadius: Radius.M,
+          },
+        ]}
+      >
+        <Text typography={'headline'} fontWeight="bold">
+          Header Background
+        </Text>
+        <SizedBox height={Spacing.S} />
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          {IMAGE_HEADER_BACKGROUND.map((item) => {
+            const selected = item === theme.assets?.headerBackground?.uri;
+            return (
+              <TouchableOpacity
+                key={`header-background-${item}`}
+                onPress={() => {
+                  DeviceEventEmitter.emit('onChangeTheme', {
+                    headerBackground: item ? { uri: item } : undefined,
+                  });
+                }}
+              >
+                <Image
+                  style={[
+                    styles.imageBackground,
+                    {
+                      borderColor: selected
+                        ? theme.colors.primary.default
+                        : theme.colors.border.default,
+                    },
+                  ]}
+                  source={{
+                    uri: item,
+                  }}
+                />
+              </TouchableOpacity>
+            );
+          })}
+        </ScrollView>
+      </View>
+      <SizedBox height={Spacing.M} />
       <View
         style={[
           Shadow.light,

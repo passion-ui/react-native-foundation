@@ -164,6 +164,29 @@ const HeaderExtendHeader: React.FC<{
 
   return (
     <>
+      <Animated.View
+        style={[
+          styles.extendedHeader,
+          styles.headerImage,
+          { opacity: opacityGradient },
+        ]}
+      >
+        <LinearGradient
+          colors={[
+            theme.colors.primary.default + Opacity['30'],
+            theme.colors.primary.default + Opacity['0'],
+          ]}
+          style={Styles.flex}
+        >
+          {theme.assets?.headerBackground && (
+            <Image
+              source={theme.assets?.headerBackground as any}
+              style={Styles.flex}
+              loading={false}
+            />
+          )}
+        </LinearGradient>
+      </Animated.View>
       <SizedBox height={heightHeader} />
       <Animated.View
         style={[
@@ -176,24 +199,6 @@ const HeaderExtendHeader: React.FC<{
           },
         ]}
       />
-
-      <Animated.View style={{ opacity: opacityGradient }}>
-        <LinearGradient
-          colors={[
-            theme.colors.primary.default + Opacity['30'],
-            theme.colors.primary.default + Opacity['0'],
-          ]}
-          style={[styles.extendedHeader, styles.headerImage]}
-        >
-          {theme.assets?.headerBackground && (
-            <Image
-              source={theme.assets?.headerBackground as any}
-              style={Styles.flex as any}
-              loading={false}
-            />
-          )}
-        </LinearGradient>
-      </Animated.View>
     </>
   );
 };

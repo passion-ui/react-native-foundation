@@ -13,9 +13,6 @@ import {
   Text,
 } from '@passionui/react-native-foundation';
 import React, { useContext, useEffect } from 'react';
-import HeaderType from './HeaderType';
-import AnimatedHeader from './AnimatedHeader';
-import SearchHeader from './SearchHeader';
 
 const Test: React.FC<ScreenContainerProps> = ({ navigation }) => {
   return <Screen scrollable={true} navigation={navigation} />;
@@ -159,54 +156,6 @@ const Motions: React.FC<ScreenContainerProps> = ({ navigation }) => {
             title={'Hide Toast'}
             onPress={() => {
               navigator?.hideToast();
-            }}
-          />
-        </Item>
-      </Container>
-      <SizedBox height={16} />
-      <Container
-        padding={Spacing.M}
-        gutter={8}
-        style={[
-          Shadow.light,
-          {
-            borderRadius: Spacing.M,
-            backgroundColor: theme.colors.background.surface,
-          },
-        ]}
-      >
-        <Item>
-          <Text typography={'callout'} fontWeight={'bold'}>
-            Screen Styles
-          </Text>
-        </Item>
-        <Item widthSpan={12}>
-          <Button
-            title={'Header Type'}
-            onPress={() => {
-              navigator?.push({
-                screen: HeaderType,
-              });
-            }}
-          />
-        </Item>
-        <Item widthSpan={12}>
-          <Button
-            title={'Animated Header'}
-            onPress={() => {
-              navigator?.push({
-                screen: AnimatedHeader,
-              });
-            }}
-          />
-        </Item>
-        <Item widthSpan={12}>
-          <Button
-            title={'Search Header'}
-            onPress={() => {
-              navigator?.push({
-                screen: SearchHeader,
-              });
             }}
           />
         </Item>
