@@ -13,12 +13,12 @@ import Animated, {
   Easing,
   Extrapolation,
   interpolate,
-  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
+import { scheduleOnRN } from 'react-native-worklets';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ApplicationContext } from '../Context';
 import type { BottomSheetParams, ScreenContainerProps } from './types';
@@ -57,7 +57,7 @@ const BottomSheet: React.FC<ScreenContainerProps> = ({ navigation, route }) => {
       onPanResponderRelease: (_, gestureState) => {
         if (gestureState.dy > 100) {
           action.current = 'gesture';
-          onDismiss();
+          onDismiss(true);
         } else {
           translateY.value = withSpring(0, {
             damping: 20,
@@ -79,18 +79,42 @@ const BottomSheet: React.FC<ScreenContainerProps> = ({ navigation, route }) => {
   delete params.screen;
 
   /**
-   * emit dismiss event
+   * open animation
    */
-  useEffect(() => {
-    translateY.value = heightDevice;
+  const openAnimation = useCallback(() => {
     translateY.value = withTiming(0, {
       duration: 350,
       easing: Easing.bezier(0.05, 0.7, 0.1, 1),
     });
+  }, [translateY]);
+
+  /**
+   * close animation
+   */
+  const closeAnimation = useCallback(
+    (callback = () => {}) => {
+      translateY.value = withTiming(
+        heightDevice,
+        {
+          duration: 200,
+          easing: Easing.bezier(0.3, 0.0, 0.8, 0.15),
+        },
+        () => scheduleOnRN(callback)
+      );
+    },
+    [heightDevice, translateY]
+  );
+
+  /**
+   * emit dismiss event
+   */
+  useEffect(() => {
+    translateY.value = heightDevice;
+    openAnimation();
     return () => {
       route.params?.onDismiss?.(action.current);
     };
-  }, [heightDevice, route.params, translateY]);
+  }, [heightDevice, openAnimation, route.params, translateY]);
 
   /**
    * handler dismiss
@@ -100,26 +124,14 @@ const BottomSheet: React.FC<ScreenContainerProps> = ({ navigation, route }) => {
       if (barrierDismissible && !force) {
         return;
       }
-
-      const closeAnimation = (cb = () => {}) => {
-        translateY.value = withTiming(
-          heightDevice,
-          {
-            duration: 200,
-            easing: Easing.bezier(0.3, 0.0, 0.8, 0.15),
-          },
-          () => runOnJS(cb)()
-        );
-      };
-
       closeAnimation(() => {
-        runOnJS(() => {
-          navigator?.pop();
+        navigator?.pop();
+        scheduleOnRN(() => {
           callback?.();
-        })();
+        });
       });
     },
-    [barrierDismissible, heightDevice, navigator, translateY]
+    [barrierDismissible, closeAnimation, navigator]
   );
 
   /**
