@@ -1,17 +1,33 @@
 import type { FastImageProps, Source } from '@d11/react-native-fast-image';
-import type { ImageProps as ExpoImageProps } from 'expo-image';
+import type {
+  ImageProps as ExpoImageProps,
+  ImageSource as ExpoImageSource,
+} from 'expo-image';
+import { ImageBackground, Platform } from 'react-native';
 
-let Image: any;
+type ImageProps = FastImageProps & ExpoImageProps;
+type ImageSource = Source & ExpoImageSource;
+let Image: ImageProps | undefined;
 
-try {
-  const ExpoImage = require('expo-image');
-  Image = ExpoImage.ImageBackground;
-} catch (e) {
-  const FastImageModule = require('@d11/react-native-fast-image');
-  Image = FastImageModule.default;
+if (Platform.OS === 'web') {
+  Image = ImageBackground as any;
+} else {
+  try {
+    const Constants = require('expo-constants').default;
+    if (Constants.executionEnvironment) {
+      Image = require('expo-image').ImageBackground;
+    }
+  } catch (e) {}
+
+  if (Image === undefined) {
+    try {
+      Image = require('@d11/react-native-fast-image').default;
+    } catch (e) {
+      Image = ImageBackground as any;
+    }
+  }
 }
 
 export { Image };
 
-export type ImageProps = FastImageProps & ExpoImageProps;
-export type ImageSource = Source;
+export type { ImageProps, ImageSource };

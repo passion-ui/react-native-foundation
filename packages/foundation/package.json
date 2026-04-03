@@ -1,6 +1,6 @@
 {
   "name": "@passionui/react-native-foundation",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A React Native design system for making cross platform applications",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
@@ -49,6 +49,9 @@
       "optional": true
     },
     "expo-linear-gradient": {
+      "optional": true
+    },
+    "react-native-web-linear-gradient": {
       "optional": true
     },
     "react-native-vector-icons": {
