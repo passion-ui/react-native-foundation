@@ -1,3 +1,4 @@
+import React from 'react';
 import type { FastImageProps, Source } from '@d11/react-native-fast-image';
 import type {
   ImageProps as ExpoImageProps,
@@ -7,7 +8,7 @@ import { ImageBackground, Platform } from 'react-native';
 
 type ImageProps = FastImageProps & ExpoImageProps;
 type ImageSource = Source & ExpoImageSource;
-let Image: ImageProps | undefined;
+let Image: React.Component<ImageProps> | undefined;
 
 if (Platform.OS === 'web') {
   Image = ImageBackground as any;

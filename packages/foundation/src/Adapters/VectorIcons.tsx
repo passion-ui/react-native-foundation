@@ -1,6 +1,7 @@
-import { Platform, View } from 'react-native';
+import React from 'react';
+import { Platform, type TextProps, View } from 'react-native';
 
-let VectorIcons: any;
+let VectorIcons: React.Component<TextProps> | any;
 
 if (Platform.OS === 'web') {
   VectorIcons = require('@expo/vector-icons');

@@ -1,9 +1,10 @@
+import React from 'react';
 import type { LinearGradientProps as ExpoProps } from 'expo-linear-gradient';
 import type { LinearGradientProps as RNProps } from 'react-native-linear-gradient';
 import { Platform, View } from 'react-native';
 
 type LinearGradientProps = RNProps & ExpoProps;
-let LinearGradient: LinearGradientProps | undefined;
+let LinearGradient: React.Component<LinearGradientProps> | any;
 
 if (Platform.OS === 'web') {
   LinearGradient = require('react-native-web-linear-gradient').default;
