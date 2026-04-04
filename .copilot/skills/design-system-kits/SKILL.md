@@ -163,6 +163,8 @@ ComponentName/
 - Always use the `Icon` component — it handles Expo / RN CLI differences automatically
 - Always use the `Image` component — it auto-selects the best image library available
 - **Always wrap Input forms inside a `Card` component** — inputs need the Card's background surface to render correctly
+- **Always apply `padding: Spacing.M` to `Card`** — Card has no built-in padding; `Spacing.M` (12) is the standard inset
+- **Use `Spacing.M` as the default spacing for screen layouts** — use it for Card padding, gaps between form fields, and general content spacing to create consistent visual rhythm
 
 ## Decision guide
 

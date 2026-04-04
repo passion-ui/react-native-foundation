@@ -8,11 +8,11 @@ interface InputMoneyProps extends InputProps {
 }
 ```
 
-Inherits all props from [Input](input.md).
+Inherits all props from [Input](./input.md).
 
 ## Usage
 
-> Wrap in a `Card` for proper background. See [Input](input.md).
+> Wrap in a `Card` for proper background. See [Input](./input.md).
 
 ```tsx
 <Card>

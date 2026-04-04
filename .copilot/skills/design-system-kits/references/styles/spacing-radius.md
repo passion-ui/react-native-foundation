@@ -16,14 +16,23 @@ Spacing.XL   // 24
 Spacing.XXL  // 36
 ```
 
-**Rule:** Never hardcode spacing numbers — always use `Spacing.*` constants for consistency.
+**Rules:**
+- Never hardcode spacing numbers — always use `Spacing.*` constants for consistency.
+- **Use `Spacing.M` (12) as the default spacing for screen layouts** — use it for padding inside `Card`, gaps between form fields (`SizedBox`), and general content spacing. This creates a visually balanced, consistent rhythm across all screens.
 
 ### Usage
 
 ```tsx
-<View style={{ padding: Spacing.L, marginBottom: Spacing.M }}>
-  <SizedBox height={Spacing.S} />
-</View>
+// Screen layout with Spacing.M as the default rhythm
+<Screen>
+  <Card style={{ padding: Spacing.M }}>
+    <Input floatingValue="Name" />
+    <SizedBox height={Spacing.M} />
+    <Input floatingValue="Email" />
+    <SizedBox height={Spacing.M} />
+    <Button title="Submit" />
+  </Card>
+</Screen>
 ```
 
 ## Radius

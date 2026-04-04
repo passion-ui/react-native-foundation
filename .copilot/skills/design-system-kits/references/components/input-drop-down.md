@@ -8,11 +8,11 @@ interface InputDropDownProps extends InputProps {
 }
 ```
 
-Inherits all props from [Input](input.md). Typically used with `navigator.showBottomSheet` or `SheetPicker`.
+Inherits all props from [Input](./input.md). Typically used with `navigator.showBottomSheet` or `SheetPicker`.
 
 ## Usage
 
-> Wrap in a `Card` for proper background. See [Input](input.md).
+> Wrap in a `Card` for proper background. See [Input](./input.md).
 
 ```tsx
 <Card>

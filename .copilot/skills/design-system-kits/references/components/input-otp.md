@@ -12,7 +12,7 @@ interface InputOTPProps {
 
 ## Usage
 
-> Wrap in a `Card` for proper background. See [Input](input.md).
+> Wrap in a `Card` for proper background. See [Input](./input.md).
 
 ```tsx
 <Card>

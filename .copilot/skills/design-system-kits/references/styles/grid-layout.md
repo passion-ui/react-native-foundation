@@ -50,7 +50,16 @@ interface ContainerListProps extends FlatListProps<any> {
 
 ## Card
 
-Styled container with surface background, shadow, and rounded corners (Spacing.M radius).
+Styled container with surface background, shadow, and rounded corners (`borderRadius: Spacing.M`).
+
+> **Important:** Card has no built-in padding. Always apply `padding: Spacing.M` as the default when using Card — this keeps content properly inset and consistent across screens.
+
+```tsx
+<Card style={{ padding: Spacing.M }}>
+  <Text typography="headline">Section Title</Text>
+  <Input floatingValue="Email" />
+</Card>
+```
 
 ## Span calculation
 
