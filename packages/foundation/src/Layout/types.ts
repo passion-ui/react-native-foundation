@@ -18,3 +18,5 @@ export interface ItemProps extends ViewProps {
    */
   heightSpan?: number;
 }
+
+export type { CardProps } from './Card/types';
