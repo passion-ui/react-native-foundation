@@ -23,22 +23,26 @@ type PopupProps = {
 
 ## Usage
 
+When using an arrow function for `screen`, spread `props` onto the component. Popup internally calls `onRequestClose` when any action button is pressed — you don't need to call it manually. Just provide the action callback.
+
 ```tsx
 navigator.showModal({
-  component: () => (
+  screen: (props) => (
     <Popup
+      {...props}
       title="Delete item?"
       description="This action cannot be undone."
       primary={{ title: 'Delete', onPress: handleDelete }}
-      secondary={{ title: 'Cancel', onPress: () => navigator.pop() }}
+      secondary={{ title: 'Cancel', onPress: () => {} }}
     />
   ),
 });
 
 // With image
 navigator.showModal({
-  component: () => (
+  screen: (props) => (
     <Popup
+      {...props}
       image="https://example.com/success.png"
       title="Payment Successful"
       description="Your order has been placed."

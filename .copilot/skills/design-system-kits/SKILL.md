@@ -128,7 +128,7 @@ const loadingRef = useRef(null);
 const toastRef = useRef(null);
 
 // 2. Create navigator instance
-const navigator = new Navigator(navigationRef, loadingRef, toastRef);
+const navigator = new Navigator({ ref: navigationRef, loadingRef, toastRef });
 
 // 3. Create localization (optional)
 const localization = new Localization({
@@ -141,7 +141,7 @@ const localization = new Localization({
   navigator={navigator}
   localization={localization}
   theme={defaultTheme}
-  screens={screens}   // { name, component } entries
+  screen={HomeScreen}
 />
 ```
 
@@ -168,20 +168,20 @@ ComponentName/
 
 ## Decision guide
 
-| Task | What to use |
-|---|---|
-| Show a new full-screen page | `navigator.push({ name, component })` |
-| Show a centered dialog/popup | `navigator.showModal({ component })` or `Popup` component |
-| Show a bottom drawer | `navigator.showBottomSheet({ component })` |
-| Show a selection list | `SheetPicker` component |
-| Show feedback messages | `navigator.showToast({ type, message })` |
-| Show loading state | `navigator.showLoading()` / `navigator.hideLoading()` |
-| Create a tab layout | `BottomTab` component |
-| Create a responsive grid | `Container` + `Item` components |
-| Create a scrollable grid | `ContainerList` component |
-| Style text | `Text` with `typography` prop (largeTitle → caption2) |
-| Build a form | Wrap `Input`, `CheckBox`, `Radio`, `Switch`, `Stepper` inside a `Card` |
-| Show progress | `ProgressBar` with `percent` prop |
-| Animate text | `LoopText` with `labels` array |
-| Show step progress | `Steps` component |
-| Paginated content | `Pagination` component |
+| Task | What to use                                                                               |
+|---|-------------------------------------------------------------------------------------------|
+| Show a new full-screen page | `navigator.push({ screen: MyScreen })`                                                    |
+| Show a centered dialog/popup | `navigator.showModal({ screen: (props) => <Popup {...props} /> })`                                    |
+| Show a bottom drawer | `navigator.showBottomSheet({ title: '...', screen: (props) => <Component {...props}/> })` |
+| Show a selection list | `SheetPicker` component                                                                   |
+| Show feedback messages | `navigator.showToast({ type, message })`                                                  |
+| Show loading state | `navigator.showLoading()` / `navigator.hideLoading()`                                     |
+| Create a tab layout | `BottomTab` component                                                                     |
+| Create a responsive grid | `Container` + `Item` components                                                           |
+| Create a scrollable grid | `ContainerList` component                                                                 |
+| Style text | `Text` with `typography` prop (largeTitle → caption2)                                     |
+| Build a form | Wrap `Input`, `CheckBox`, `Radio`, `Switch`, `Stepper` inside a `Card`                    |
+| Show progress | `ProgressBar` with `percent` prop                                                         |
+| Animate text | `LoopText` with `labels` array                                                            |
+| Show step progress | `Steps` component                                                                         |
+| Paginated content | `Pagination` component                                                                    |

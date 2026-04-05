@@ -34,8 +34,10 @@ const languages = [
 ];
 
 navigator.showBottomSheet({
-  component: () => (
+  title: 'Select language',
+  screen: (props) => (
     <SheetPicker
+      {...props}
       data={languages}
       selected={selectedLang}
       onSelect={(index) => setSelectedLang(languages[index])}

@@ -230,13 +230,15 @@ const languages = [
 ];
 
 navigator?.showBottomSheet({
-  component: () => (
+  title: 'Select language',
+  screen: (props) => (
     <SheetPicker
+      {...props}
       data={languages}
       selected={languages.find(l => l.value === currentLang)}
-      onSelect={(item) => {
-        localization.changeLanguage(item.value);
-        setCurrentLang(item.value);
+      onSelect={(index) => {
+        localization.changeLanguage(languages[index].value);
+        setCurrentLang(languages[index].value);
       }}
     />
   ),

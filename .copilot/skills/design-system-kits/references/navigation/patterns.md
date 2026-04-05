@@ -21,16 +21,19 @@ function Step1({ navigation }) {
 
 ## Confirmation popup before action
 
+Popup and SheetPicker internally call `onRequestClose` when an action is triggered — no need to call it manually. Just spread `{...props}` and provide your action callbacks.
+
 ```tsx
 const { navigator } = useContext(ApplicationContext);
 
 navigator?.showModal({
-  screen: () => (
+  screen: (props) => (
     <Popup
+      {...props}
       title="Are you sure?"
       description="This will delete your account permanently."
       primary={{ title: 'Delete', onPress: handleDelete }}
-      secondary={{ title: 'Cancel', onPress: () => navigator?.pop() }}
+      secondary={{ title: 'Cancel', onPress: () => {} }}
     />
   ),
 });
@@ -41,8 +44,9 @@ navigator?.showModal({
 ```tsx
 navigator?.showBottomSheet({
   title: 'Choose source',
-  screen: () => (
+  screen: (props) => (
     <SheetPicker
+      {...props}
       data={[
         { title: 'Camera', value: 'camera', icon: <Icon name="camera" /> },
         { title: 'Gallery', value: 'gallery', icon: <Icon name="image" /> },
@@ -90,18 +94,35 @@ function DashboardScreen({ navigation }) {
 
 ## Passing data between screens
 
+Two approaches for passing data:
+
 ```tsx
-// Push with params — extra properties are passed as route.params
+// Approach 1: Named component — extra params available via route.params
 navigator?.push({
   screen: ProductDetailScreen,
   productId: 42,
 });
 
-// Access in target screen
 function ProductDetailScreen({ route, navigation }) {
-  const { productId } = route.params;
-  // ...
+  const { productId } = route.params; // 42
 }
+
+// Approach 2: Arrow function — spread props + capture values via closure
+// Best for modals and bottom sheets with inline UI
+const product = { id: 42, name: 'Widget' };
+
+// Popup handles onRequestClose internally — just spread props and provide callbacks
+navigator?.showModal({
+  screen: (props) => (
+    <Popup
+      {...props}
+      title={`Delete ${product.name}?`}
+      description="This action cannot be undone."
+      primary={{ title: 'Delete', onPress: () => deleteProduct(product.id) }}
+      secondary={{ title: 'Cancel', onPress: () => {} }}
+    />
+  ),
+});
 ```
 
 ## Reset to login after logout

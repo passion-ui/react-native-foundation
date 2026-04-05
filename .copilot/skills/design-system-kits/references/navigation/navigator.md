@@ -91,6 +91,89 @@ navigator.showToast({
 navigator.hideToast();
 ```
 
+## Passing props to screen
+
+Extra properties passed alongside `screen` are forwarded as props to the rendered component. The component also receives `navigation` and `onRequestClose` automatically.
+
+### Method 1: Arrow function with props spread (recommended for inline UI)
+
+Use when rendering a component inline. The arrow function receives all injected props (`onRequestClose`, `navigation`, etc.) — spread them onto the component with `{...props}`.
+
+**Components like `Popup` and `SheetPicker` already call `onRequestClose` internally** when an action is triggered. Just spread `{...props}` and provide your callbacks — no need to call `onRequestClose` yourself.
+
+```tsx
+const items = [...];
+const selected = items[0];
+
+// Popup — handles dismiss automatically on button press
+navigator?.showModal({
+  screen: (props) => (
+    <Popup
+      {...props}
+      title="Delete item?"
+      description="This action cannot be undone."
+      primary={{ title: 'Delete', onPress: handleDelete }}
+      secondary={{ title: 'Cancel', onPress: () => {} }}
+    />
+  ),
+});
+
+// SheetPicker — handles dismiss automatically on selection
+navigator?.showBottomSheet({
+  title: 'Select item',
+  screen: (props) => (
+    <SheetPicker
+      {...props}
+      data={items}
+      selected={selected}
+      onSelect={(index) => handleSelect(items[index])}
+    />
+  ),
+});
+
+// Custom component — use props.onRequestClose manually to dismiss
+navigator?.showBottomSheet({
+  title: 'Edit profile',
+  screen: (props) => (
+    <EditProfileForm
+      {...props}
+      onSave={(data) => {
+        saveProfile(data);
+        props.onRequestClose?.();
+      }}
+    />
+  ),
+});
+```
+
+### Method 2: Named component with extra params
+
+Use when navigating to a full screen component. Extra params are spread as props and also available on `route.params`.
+
+```tsx
+// Pass extra params as top-level properties
+navigator?.push({
+  screen: ProductDetailScreen,
+  productId: 42,
+  title: 'Widget',
+});
+
+// Access in the target screen
+function ProductDetailScreen({ route, navigation }) {
+  const { productId, title } = route.params;
+  // productId = 42, title = 'Widget'
+}
+```
+
+### Injected props reference
+
+| Prop | Type | Available in |
+|---|---|---|
+| `navigation` | Navigation object | All (push, modal, bottom sheet) |
+| `onRequestClose` | `(callback?) => void` | `showModal`, `showBottomSheet` only |
+
+`onRequestClose` triggers the dismiss animation (fade/scale for modals, slide-down for bottom sheets), then pops the screen. Pass an optional `callback` to run code after dismissal.
+
 ## Accessing in any screen
 
 ```typescript

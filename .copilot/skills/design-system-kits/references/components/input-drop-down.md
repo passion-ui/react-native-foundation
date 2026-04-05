@@ -28,7 +28,19 @@ Typically used with `navigator.showBottomSheet` or `SheetPicker`. Automatically 
   <InputDropDown
     floatingValue="Country"
     value={selectedCountry}
-    onPress={() => navigator.showBottomSheet({ component: CountryPicker })}
+    onPress={() =>
+      navigator.showBottomSheet({
+        title: 'Country',
+        screen: (props) => (
+          <SheetPicker
+            {...props}
+            data={countries}
+            selected={selectedCountry}
+            onSelect={(index) => setSelectedCountry(countries[index])}
+          />
+        ),
+      })
+    }
   />
 </Card>
 <Card>
@@ -38,7 +50,19 @@ Typically used with `navigator.showBottomSheet` or `SheetPicker`. Automatically 
     leading="earth"
     value={selectedLang}
     required
-    onPress={() => navigator.showBottomSheet({ component: LangPicker })}
+    onPress={() =>
+      navigator.showBottomSheet({
+        title: 'Language',
+        screen: (props) => (
+          <SheetPicker
+            {...props}
+            data={languages}
+            selected={selectedLang}
+            onSelect={(index) => setSelectedLang(languages[index])}
+          />
+        ),
+      })
+    }
   />
 </Card>
 ```
