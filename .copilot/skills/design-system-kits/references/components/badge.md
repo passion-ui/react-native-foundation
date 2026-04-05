@@ -4,13 +4,13 @@ Small status indicator — dot or label.
 
 ```typescript
 interface BadgeProps extends ViewProps {
-  label?: string;
-  type?: 'default' | 'dot' | 'label';
+  label?: string;           // text displayed on badge (default: 'Label')
+  type?: 'default' | 'dot'; // display type (default: 'default')
 }
 ```
 
-- `dot`: Small circle (no text)
-- `default`: Rectangle with label text
+- `dot`: Small circle indicator (no text)
+- `default`: Rectangle with label text (caption2 bold, white)
 - Uses `theme.colors.error.default` for background
 
 ## Usage
@@ -18,5 +18,5 @@ interface BadgeProps extends ViewProps {
 ```tsx
 <Badge type="dot" />
 <Badge label="3" />
-<Badge label="New" type="label" />
+<Badge label="New" />
 ```

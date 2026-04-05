@@ -11,7 +11,6 @@ type TabBarItemProps = {
 };
 
 interface TabBarProps extends ViewProps {
-  type?: 'default' | 'card';
   direction?: 'row' | 'column';
   tabs: TabBarItemProps[];
   initialIndex?: number;

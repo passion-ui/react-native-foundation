@@ -25,16 +25,20 @@ interface SheetPickerProps extends Omit<FlatListProps<PickerItem>, 'renderItem'>
 
 ## Usage
 
+> **Note:** `onSelect` receives the **index** (number) of the selected item, not the item itself.
+
 ```tsx
+const languages = [
+  { title: 'English', value: 'en', icon: <Image source={flags.en} /> },
+  { title: 'Tiếng Việt', value: 'vi', icon: <Image source={flags.vi} /> },
+];
+
 navigator.showBottomSheet({
   component: () => (
     <SheetPicker
-      data={[
-        { title: 'English', value: 'en', icon: <Image source={flags.en} /> },
-        { title: 'Tiếng Việt', value: 'vi', icon: <Image source={flags.vi} /> },
-      ]}
+      data={languages}
       selected={selectedLang}
-      onSelect={(item) => setSelectedLang(item)}
+      onSelect={(index) => setSelectedLang(languages[index])}
     />
   ),
 });

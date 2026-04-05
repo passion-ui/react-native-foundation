@@ -3,7 +3,7 @@
 Shimmer loading placeholder.
 
 ```typescript
-type SkeletonProps = {
+type SkeletonTypes = {
   style?: StyleProp<ViewStyle>;
 };
 ```

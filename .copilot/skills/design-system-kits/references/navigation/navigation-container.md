@@ -20,10 +20,15 @@ NavigationContainer
 
 ## Props
 
-- `navigator` — Navigator instance
-- `theme` — Theme object (defaultTheme, defaultDarkTheme, or custom)
-- `localization` — Localization instance (optional)
-- `screens` — Array of `{ name, component }` screen entries
+```typescript
+type NavigationContainerProps = {
+  navigator: Navigator;                    // Navigator instance
+  screen: React.FC<ScreenContainerProps>;  // root screen component
+  theme: Theme;                            // theme object
+  params?: { string: any };               // initial params for root screen
+  localization: Localization;              // Localization instance
+};
+```
 
 ## Setup
 
@@ -41,7 +46,7 @@ export default function App() {
   const toastRef = useRef(null);
 
   const navigator = useMemo(
-    () => new Navigator(navigationRef, loadingRef, toastRef),
+    () => new Navigator({ ref: navigationRef, loadingRef, toastRef }),
     []
   );
 
@@ -55,10 +60,7 @@ export default function App() {
       navigator={navigator}
       theme={defaultTheme}
       localization={localization}
-      screens={[
-        { name: 'Home', component: HomeScreen },
-        { name: 'Profile', component: ProfileScreen },
-      ]}
+      screen={HomeScreen}
     />
   );
 }

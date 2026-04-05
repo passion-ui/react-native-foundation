@@ -5,10 +5,10 @@ A circular or rounded icon-only button.
 ```typescript
 interface IconButtonProps extends TouchableOpacityProps {
   icon: string;
-  type?: 'primary' | 'tonal' | 'secondary' | 'outline' | 'disabled';
+  type?: 'primary' | 'tonal' | 'secondary' | 'outline' | 'disabled';  // default: 'primary'
   color?: string;
-  size?: 'large' | 'medium' | 'small';
-  shape?: 'circle' | 'rounded';
+  size?: 'large' | 'medium' | 'small';   // default: 'small'
+  shape?: 'circle' | 'rounded';          // default: 'circle'
 }
 ```
 
@@ -17,7 +17,7 @@ interface IconButtonProps extends TouchableOpacityProps {
 | Size | Dimensions | Icon size |
 |------|-----------|-----------|
 | large | 48×48 | 24px |
-| medium | 40×40 | 20px |
+| medium | 40×40 | 22px |
 | small | 32×32 | 20px |
 
 ## Usage

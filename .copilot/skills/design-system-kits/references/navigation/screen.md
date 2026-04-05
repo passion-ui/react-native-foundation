@@ -3,13 +3,20 @@
 Base wrapper for every screen. Provides header, scroll, keyboard avoidance, and safe area handling.
 
 ```typescript
-interface ScreenProps {
+interface ScreenProps extends ViewProps {
+  navigation: StackNavigationProp<any>;     // REQUIRED — from react-navigation
   headerType?: 'default' | 'surface' | 'extended' | 'none';
-  scroll?: boolean;
+  scrollable?: boolean;                     // enables ScrollView wrapping
+  enableKeyboardAvoidingView?: boolean;     // keyboard avoiding behavior
+  edges?: Edges;                            // safe area edges
   animatedHeader?: AnimatedHeader;
-  footer?: ReactNode;
-  fab?: ReactNode;        // floating action button
+  scrollViewProps?: ScrollViewProps;         // props for underlying ScrollView
+  headerComponent?: ReactNode;              // custom header component
+  footerComponent?: ReactNode;              // footer at bottom of screen
+  floatingComponent?: ReactNode;            // floating action button / overlay
+  layoutOffset?: -8 | -24 | -56;           // content overlap on extended header
   backgroundColor?: string;
+  animatedValue?: Animated.Value;
 }
 ```
 
@@ -25,34 +32,34 @@ interface ScreenProps {
 ## Animated headers
 
 ```typescript
-interface AnimatedHeader {
-  component?: ReactNode;    // custom header content
-  height?: number;          // header height
-  offset?: number;          // content overlap (-8, -24, -56)
-}
+type AnimatedHeader = {
+  useBackHeader?: boolean;
+  headerTintColor?: string;
+  headerTitle?: (props?: any) => React.ReactElement;
+  component?: (props?: any) => React.ReactElement;
+};
 ```
 
 ## Screen ref
 
-Screens expose a ref with scroll control:
+Screens expose a ref extending ScrollView with additional methods:
 
 ```typescript
-interface ScreenRef {
-  scrollTo: (options: { y: number; animated?: boolean }) => void;
-  scrollToEnd: (options?: { animated?: boolean }) => void;
-  setSearchHeader: (config: SearchHeaderConfig) => void;
-}
+type ScreenRef = {
+  setSearchHeader: (params: HeaderSearchProps) => void;
+} & ScrollView;
 ```
 
 ## Usage
 
 ```tsx
-function ProfileScreen({ route }) {
+function ProfileScreen({ navigation }) {
   return (
     <Screen
+      navigation={navigation}
       headerType="surface"
-      scroll
-      footer={<Button title="Save" onPress={save} full />}
+      scrollable
+      footerComponent={<Button title="Save" onPress={save} full />}
     >
       <Text typography="title1">Profile</Text>
       {/* screen content */}
@@ -60,10 +67,27 @@ function ProfileScreen({ route }) {
   );
 }
 
-// No header
-function FullScreen() {
+// Extended header with offset
+function HeroScreen({ navigation }) {
   return (
-    <Screen headerType="none">
+    <Screen
+      navigation={navigation}
+      headerType="extended"
+      scrollable
+      layoutOffset={-56}
+      floatingComponent={<IconButton icon="plus" onPress={handleAdd} />}
+    >
+      <Card>
+        <Text typography="title2">Content overlapping header</Text>
+      </Card>
+    </Screen>
+  );
+}
+
+// No header
+function FullScreen({ navigation }) {
+  return (
+    <Screen navigation={navigation} headerType="none">
       <View style={Styles.flexCenter}>
         <Text typography="title1">Centered Content</Text>
       </View>

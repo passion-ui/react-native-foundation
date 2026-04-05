@@ -5,14 +5,14 @@ Common navigation recipes using the foundation package.
 ## Multi-step flow
 
 ```tsx
-function Step1() {
+function Step1({ navigation }) {
   const { navigator } = useContext(ApplicationContext);
   return (
-    <Screen>
+    <Screen navigation={navigation}>
       <Text typography="title2">Step 1</Text>
       <Button
         title="Next"
-        onPress={() => navigator?.push({ name: 'Step2', component: Step2 })}
+        onPress={() => navigator?.push({ screen: Step2 })}
       />
     </Screen>
   );
@@ -25,7 +25,7 @@ function Step1() {
 const { navigator } = useContext(ApplicationContext);
 
 navigator?.showModal({
-  component: () => (
+  screen: () => (
     <Popup
       title="Are you sure?"
       description="This will delete your account permanently."
@@ -40,7 +40,8 @@ navigator?.showModal({
 
 ```tsx
 navigator?.showBottomSheet({
-  component: () => (
+  title: 'Choose source',
+  screen: () => (
     <SheetPicker
       data={[
         { title: 'Camera', value: 'camera', icon: <Icon name="camera" /> },
@@ -72,17 +73,17 @@ const handleSave = async () => {
 ## Tab layout inside a screen
 
 ```tsx
-function DashboardScreen() {
+function DashboardScreen({ navigation }) {
   return (
-    <Screen headerType="default">
-      <BottomTab
-        tabs={[
-          { label: 'Overview', icon: 'chart-bar', content: <OverviewTab /> },
-          { label: 'Analytics', icon: 'chart-line', content: <AnalyticsTab /> },
-          { label: 'Reports', icon: 'file-document', content: <ReportsTab /> },
-        ]}
-      />
-    </Screen>
+    <BottomTab
+      navigation={navigation}
+      initialRouteName="Overview"
+      tabs={[
+        { name: 'Overview', tabBarLabel: 'Overview', icon: 'chart-bar', screen: OverviewTab },
+        { name: 'Analytics', tabBarLabel: 'Analytics', icon: 'chart-line', screen: AnalyticsTab },
+        { name: 'Reports', tabBarLabel: 'Reports', icon: 'file-document', screen: ReportsTab },
+      ]}
+    />
   );
 }
 ```
@@ -90,15 +91,14 @@ function DashboardScreen() {
 ## Passing data between screens
 
 ```tsx
-// Push with params
+// Push with params — extra properties are passed as route.params
 navigator?.push({
-  name: 'ProductDetail',
-  component: ProductDetailScreen,
-  params: { productId: 42 },
+  screen: ProductDetailScreen,
+  productId: 42,
 });
 
 // Access in target screen
-function ProductDetailScreen({ route }) {
+function ProductDetailScreen({ route, navigation }) {
   const { productId } = route.params;
   // ...
 }
@@ -109,8 +109,7 @@ function ProductDetailScreen({ route }) {
 ```tsx
 const handleLogout = () => {
   navigator?.reset({
-    name: 'Login',
-    component: LoginScreen,
+    screen: LoginScreen,
   });
 };
 ```

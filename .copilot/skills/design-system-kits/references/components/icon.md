@@ -6,16 +6,17 @@ Renders vector icons with adapter support for both Expo and RN CLI.
 interface IconProps extends TextProps {
   type?: 'FontAwesome' | 'FontAwesome5' | 'MaterialCommunityIcons' | 'Image';
   name: string | ImageSourcePropType;
-  size?: number;
-  color?: string;
+  size?: number;     // default: 24
+  color?: string;    // default: theme.colors.text.default
 }
 ```
 
-Default type is `MaterialCommunityIcons`. When `type="Image"`, pass an image source as `name`.
+The `type` prop selects the icon library:
+- `MaterialCommunityIcons` (default) — recommended, used throughout the design system
+- `FontAwesome` / `FontAwesome5` — FontAwesome icon sets
+- `Image` — renders an image source instead of a vector icon
 
-## Supported icon libraries
-
-MaterialCommunityIcons, FontAwesome, FontAwesome5, FontAwesome6, Ionicons, Feather, MaterialIcons, Entypo, AntDesign, EvilIcons, Foundation, Octicons, SimpleLineIcons, Zocial.
+> **Note:** The VectorIcons adapter loads additional icon libraries (Ionicons, Feather, MaterialIcons, Entypo, AntDesign, EvilIcons, FontAwesome6, Foundation, Octicons, SimpleLineIcons, Zocial) but they are not accessible through the `Icon` component's `type` prop. Use `MaterialCommunityIcons`, `FontAwesome`, or `FontAwesome5` for vector icons.
 
 ## Usage
 

@@ -9,7 +9,7 @@ const navigationRef = useRef(null);
 const loadingRef = useRef(null);
 const toastRef = useRef(null);
 
-const navigator = new Navigator(navigationRef, loadingRef, toastRef);
+const navigator = new Navigator({ ref: navigationRef, loadingRef, toastRef });
 ```
 
 ## Navigation methods
@@ -17,24 +17,20 @@ const navigator = new Navigator(navigationRef, loadingRef, toastRef);
 ```typescript
 // Push a new screen onto the stack
 navigator.push({
-  name: string,
-  component: React.ComponentType,
-  params?: object,
-  passProps?: object,
+  screen: React.FC<ScreenContainerProps>,
+  // ...any additional params accessible via route.params
 });
 
 // Replace the current screen
 navigator.replace({
-  name: string,
-  component: React.ComponentType,
-  params?: object,
+  screen: React.FC<ScreenContainerProps>,
+  // ...additional params
 });
 
 // Reset the entire stack to a new root
 navigator.reset({
-  name: string,
-  component: React.ComponentType,
-  params?: object,
+  screen: React.FC<ScreenContainerProps>,
+  // ...additional params
 });
 
 // Pop the current screen (or N screens)
@@ -49,21 +45,25 @@ navigator.popToTop();
 ```typescript
 // Show a transparent dialog screen (rendered on a separate stack group)
 navigator.present({
-  name: string,
-  component: React.ComponentType,
-  params?: object,
+  screen: React.FC<ScreenContainerProps>,
+  // ...additional params
 });
 
 // Show a centered modal with fade + scale animation
 navigator.showModal({
-  component: React.ComponentType,
-  params?: object,
+  screen: React.FC<ScreenContainerProps>,
+  onDismiss?: () => void,
+  barrierDismissible?: boolean,
+  modalStyle?: StyleProp<ViewStyle>,
 });
 
 // Show a draggable bottom sheet with spring animation
 navigator.showBottomSheet({
-  component: React.ComponentType,
-  params?: object,
+  screen: React.FC<ScreenContainerProps>,
+  title: string,                    // required — header title
+  backgroundColor?: string,
+  onClose?: () => void,
+  onDismiss?: () => void,
 });
 ```
 
@@ -71,7 +71,11 @@ navigator.showBottomSheet({
 
 ```typescript
 // Show/hide full-screen loading overlay
-navigator.showLoading(params?: object);
+navigator.showLoading(params?: {
+  title?: string;
+  message?: string;
+  duration?: number;
+});
 navigator.hideLoading();
 
 // Show/hide toast notification
@@ -80,6 +84,9 @@ navigator.showToast({
   icon?: string,
   message: string,
   action?: { title: string; onPress: () => void },
+  onDismiss?: () => void,
+  position?: number,
+  duration?: number,
 });
 navigator.hideToast();
 ```
@@ -90,14 +97,13 @@ navigator.hideToast();
 import { useContext } from 'react';
 import { ApplicationContext } from '@passionui/react-native-foundation';
 
-function MyScreen() {
+function MyScreen({ navigation }) {
   const { navigator } = useContext(ApplicationContext);
 
   const goToDetails = () => {
     navigator?.push({
-      name: 'Details',
-      component: DetailsScreen,
-      params: { id: 123 },
+      screen: DetailsScreen,
+      id: 123,
     });
   };
 }

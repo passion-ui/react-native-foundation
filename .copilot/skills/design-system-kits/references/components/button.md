@@ -4,13 +4,13 @@ A pressable button with 6 type variants and 3 sizes.
 
 ```typescript
 interface ButtonProps extends TouchableOpacityProps {
-  title: string;
+  title?: string;          // button label (default: 'Button')
   onPress: () => void;
   type?: 'primary' | 'tonal' | 'outline' | 'text' | 'disabled' | 'gradient';
-  size?: 'large' | 'medium' | 'small';
+  size?: 'large' | 'medium' | 'small';      // default: 'large'
   color?: string;
-  full?: boolean;          // full-width
-  round?: boolean;         // fully rounded corners
+  full?: boolean;          // full-width (default: true)
+  round?: boolean;         // fully rounded corners (default: false)
   loading?: boolean;       // shows ActivityIndicator on leading
   leading?: string | ReactNode;  // icon name or custom node
   trailing?: string | ReactNode;
